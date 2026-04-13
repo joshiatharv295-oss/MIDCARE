@@ -1,0 +1,3011 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MidCare - Your Trusted Healthcare Partner</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2a7de1;
+            --secondary-color: #00b894;
+            --accent-color: #fd79a8;
+            --dark-color: #2d3436;
+            --light-color: #f8f9fa;
+            --gradient-primary: linear-gradient(135deg, #2a7de1, #00b894);
+            --gradient-secondary: linear-gradient(135deg, #fd79a8, #e17055);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .navbar {
+            background: var(--gradient-primary);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            color: white;
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(42, 125, 225, 0.85), rgba(0, 184, 148, 0.85)), url('https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .section-title {
+            color: var(--dark-color);
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .doctor-card .card-img-top {
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .doctor-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeUp 420ms ease both;
+        }
+
+        .card {
+            transition: transform 220ms ease, box-shadow 220ms ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+        }
+
+        @keyframes softPulse {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(0) scale(1.03); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        .btn-primary.pulse {
+            animation: softPulse 1.6s ease-in-out infinite;
+        }
+
+        .hidden { display: none !important; }
+
+        .page-transition {
+            animation: fadeUp 320ms ease both;
+        }
+        
+        /* Address autocomplete styling */
+        .suggestion-item {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .suggestion-item:hover {
+            background-color: #f8f9fa !important;
+        }
+        
+        .suggestion-item:last-child {
+            border-bottom: none !important;
+        }
+        
+        #addressSuggestions {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0.375rem;
+        }
+        
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        
+        .hover-bg-light:hover {
+            background-color: #f8f9fa !important;
+        }
+        
+        /* Map container styling */
+        .map-container {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .map-container:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        #addressMapFrame {
+            transition: opacity 0.3s ease;
+            border-radius: 8px;
+        }
+        
+        .map-btn {
+            transition: all 0.2s ease;
+            border-radius: 6px;
+        }
+        
+        .map-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .map-btn:active {
+            transform: translateY(0);
+        }
+        
+        .location-spinner {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .medicine-card .card-img-top {
+            height: 200px;
+            object-fit: contain;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(42, 125, 225, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(253, 121, 168, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .profile-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .chatbot-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .chatbot-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 5px 20px rgba(42, 125, 225, 0.4);
+            font-size: 1.8rem;
+            transition: all 0.3s;
+            animation: floatY 3s ease-in-out infinite;
+        }
+        
+        .chatbot-button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); box-shadow: 0 5px 20px rgba(42,125,225,0.35); }
+            50% { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(42,125,225,0.45); }
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 85px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chatbot-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-logo { width: 28px; height: 28px; border-radius: 6px; }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 18px;
+            border-radius: 20px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .bot-message {
+            background: white;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .user-message {
+            background: var(--primary-color);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 2px 5px rgba(42, 125, 225, 0.2);
+        }
+        
+        .chatbot-input {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            background: white;
+        }
+        
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-links h5 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h5:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #b2b2b2;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+            color: #b2b2b2;
+        }
+        
+        .login-modal, .signup-modal, .appointment-modal {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 25px;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .disease-category {
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        
+        .disease-category:hover {
+            background: rgba(42, 125, 225, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .active-category {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .price-tag {
+            font-weight: 700;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+        
+        .badge-custom {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+        
+        .rating {
+            color: #ffc107;
+        }
+        
+        .search-box {
+            border-radius: 50px;
+            padding: 15px 25px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .search-box:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(42, 125, 225, 0.25);
+        }
+        
+        .page-section {
+            padding: 80px 0;
+        }
+        
+        .page-hero {
+            background: linear-gradient(rgba(42, 125, 225, 0.9), rgba(0, 184, 148, 0.9)), url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .page-content {
+            padding: 60px 0;
+        }
+
+        /* Section backgrounds with medical imagery */
+        #doctors {
+            background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center; color: #fff; border-radius: 16px; padding: 32px 24px; margin-bottom: 50px;
+        }
+        #pharmacy {
+            background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1580281780460-82d277b0ec69?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center; color: #fff; border-radius: 16px; padding: 32px 24px; margin-bottom: 50px;
+        }
+        #appointments {
+            background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center; color: #fff; border-radius: 16px; padding: 32px 24px; margin-bottom: 50px;
+        }
+        #about {
+            background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1580281780460-82d277b0ec69?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center; color: #fff; border-radius: 16px; padding: 32px 24px; margin-bottom: 50px;
+        }
+        #contact {
+            background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1581582420565-5f32f4b3f1b7?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center; color: #fff; border-radius: 16px; padding: 32px 24px; margin-bottom: 50px;
+        }
+        
+        .doctor-detail-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .doctor-detail-img {
+            height: 400px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .availability-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 500;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .available {
+            background: rgba(0, 184, 148, 0.15);
+            color: var(--secondary-color);
+        }
+        
+        .unavailable {
+            background: rgba(253, 121, 168, 0.15);
+            color: var(--accent-color);
+        }
+        
+        .medicine-category-filter {
+            margin-bottom: 30px;
+        }
+        
+        .category-filter-btn {
+            border: 2px solid #e0e0e0;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .category-filter-btn:hover, .category-filter-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .cart-summary-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 20px;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            
+            .chatbot-window {
+                width: 300px;
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-heartbeat"></i> MidCare
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#doctors">Doctors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pharmacy">Pharmacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#appointments">Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#orders">My Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2" id="loginBtn"><i class="fas fa-sign-in-alt me-1"></i> Login</button>
+                    <button class="btn btn-light" id="signupBtn"><i class="fas fa-user-plus me-1"></i> Sign Up</button>
+                    <div id="userSection" class="hidden">
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                                <i class="fas fa-user me-1"></i> <span id="userName">User</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#profile"><i class="fas fa-user-circle me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="#orders"><i class="fas fa-receipt me-2"></i>My Orders</a></li>
+                                <li><a class="dropdown-item" href="#cart"><i class="fas fa-shopping-cart me-2"></i>Cart <span id="cartCount" class="badge bg-primary">0</span></a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            </ul>
+                        </div>
+
+    <!-- Place Order Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-bag-shopping me-2"></i>Place Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="orderForm">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="orderName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="orderEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="orderPhone" inputmode="tel" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address Line 1</label>
+                            <input type="text" class="form-control" id="orderAddress" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address Line 2 (Optional)</label>
+                            <input type="text" class="form-control" id="orderAddress2">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Landmark (Optional)</label>
+                            <input type="text" class="form-control" id="orderLandmark">
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" id="orderCity" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">State</label>
+                                <input type="text" class="form-control" id="orderState" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">PIN</label>
+                                <input type="text" class="form-control" id="orderPin" inputmode="numeric" required>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Delivery Instructions (Optional)</label>
+                            <textarea class="form-control" id="orderInstructions" rows="2" placeholder="e.g., Leave at reception, call on arrival"></textarea>
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Find Your Address on Map</label>
+                            <div class="map-container p-3">
+                                <div class="d-flex gap-2 mb-3">
+                                    <input type="text" class="form-control form-control-sm" id="mapSearchInput" placeholder="Search location on map...">
+                                    <button type="button" class="btn btn-primary btn-sm map-btn" id="searchMapBtn">
+                                        <i class="fas fa-search me-1"></i> Search
+                                    </button>
+                                    <button type="button" class="btn btn-success btn-sm map-btn" id="useMyLocationBtn">
+                                        <i class="fas fa-location-crosshairs me-1"></i> My Location
+                                    </button>
+                                </div>
+                                <div class="ratio ratio-16x9" style="height: 300px;">
+                                    <iframe 
+                                        id="addressMapFrame"
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMbCsKDU4JzE3LjgiTiA3N8KwMzUnNDAuNiJF!5e0!3m2!1sen!2sin!4v1234567890"
+                                        style="border:0; border-radius: 8px;" 
+                                        allowfullscreen="" 
+                                        loading="lazy" 
+                                        referrerpolicy="no-referrer-when-downgrade">
+                                    </iframe>
+                                </div>
+                                <div class="mt-3 d-flex gap-2">
+                                    <button type="button" class="btn btn-outline-primary btn-sm flex-fill map-btn" id="fillAddressBtn">
+                                        <i class="fas fa-map-marker-alt me-1"></i> Use Current Map Location
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm map-btn" id="resetMapBtn">
+                                        <i class="fas fa-redo me-1"></i> Reset Map
+                                    </button>
+                                </div>
+                                <div class="small text-muted mt-2">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Search for your location or use "My Location" button, then click "Use Current Map Location" to auto-fill address fields
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Coupon Code (Optional)</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="orderCoupon" placeholder="SAVE10">
+                                <button class="btn btn-outline-secondary" type="button" id="applyCouponBtn">Apply</button>
+                            </div>
+                            <div class="small text-muted mt-1" id="couponStatus"></div>
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Payment Method</label>
+                            <select class="form-select" id="orderPayment" required>
+                                <option value="COD">Cash on Delivery (COD)</option>
+                                <option value="UPI">UPI</option>
+                                <option value="Card">Credit/Debit Card</option>
+                                <option value="NetBanking">Net Banking</option>
+                            </select>
+                        </div>
+                        <div class="mt-3" id="upiSection" style="display:none;">
+                            <label class="form-label">UPI ID</label>
+                            <input type="text" class="form-control" id="orderUpiId" placeholder="name@bank">
+                        </div>
+                        <div class="mt-3" id="cardSection" style="display:none;">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">Card Number</label>
+                                    <input type="text" class="form-control" id="orderCardNumber" inputmode="numeric" placeholder="1234 5678 9012 3456">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Expiry (MM/YY)</label>
+                                    <input type="text" class="form-control" id="orderCardExpiry" placeholder="MM/YY">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">CVV</label>
+                                    <input type="password" class="form-control" id="orderCardCvv" inputmode="numeric" placeholder="***">
+                                </div>
+                            </div>
+                            <div class="small text-muted mt-2">Card details are for demo only (no real payment is processed).</div>
+                        </div>
+                        <div class="mt-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="saveAddress">
+                            <label class="form-check-label" for="saveAddress">Save this address for next time</label>
+                        </div>
+                        <div class="mt-3 small text-muted" id="orderSummary"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Confirm Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page Content -->
+    <div id="homePage">
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="container">
+                <h1 class="display-4 fw-bold mb-4">Your Health, Our Priority</h1>
+                <p class="lead mb-5">India's most trusted platform for doctor appointments and medicine delivery. Connect with top specialists and get genuine medicines delivered to your doorstep.</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="input-group input-group-lg">
+                            <input type="text" class="form-control search-box" placeholder="Search for doctors, medicines, or symptoms...">
+                            <button class="btn btn-primary" type="button"><i class="fas fa-search me-1"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="home-features" class="container mb-5">
+            <div class="row text-center">
+                <div class="col-md-4 mb-5">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Expert Doctors</h3>
+                    <p>Consult with certified specialists across various medical fields with years of experience</p>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="feature-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3>Online Pharmacy</h3>
+                    <p>Order prescribed medicines and get them delivered to your home with guaranteed authenticity</p>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Easy Appointments</h3>
+                    <p>Book appointments with doctors based on your health condition at your convenience</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doctors by Disease Section -->
+        <section id="doctors" class="container mb-5">
+            <h2 class="section-title">Find Doctors by Specialty</h2>
+            
+            <div class="row">
+                <!-- Disease Categories -->
+                <div class="col-md-3">
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action disease-category active-category" data-disease="all">All Specialties</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="cardiology">Cardiology</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="dermatology">Dermatology</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="neurology">Neurology</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="orthopedics">Orthopedics</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="pediatrics">Pediatrics</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="gastroenterology">Gastroenterology</a>
+                    </div>
+                </div>
+                
+                <!-- Doctors List -->
+                <div class="col-md-9">
+                    <div class="row" id="doctorsList">
+                        <!-- Doctors will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pharmacy Section -->
+        <section id="pharmacy" class="container mb-5">
+            <h2 class="section-title">Featured Medicines</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control search-box" placeholder="Search for medicines...">
+                        <button class="btn btn-primary" type="button"><i class="fas fa-search me-1"></i></button>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="btn-group medicine-category-filter">
+                        <button class="btn category-filter-btn active">All</button>
+                        <button class="btn category-filter-btn">Prescription</button>
+                        <button class="btn category-filter-btn">OTC</button>
+                        <button class="btn category-filter-btn">Wellness</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" id="medicinesList">
+                <!-- Medicines will be dynamically loaded here -->
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#pharmacy" class="btn btn-primary">View All Medicines <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+        </section>
+
+        <!-- Health Tips Section -->
+        <section id="home-tips" class="container mb-5">
+            <h2 class="section-title">Health Tips & Articles</h2>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Health Tip">
+                        <div class="card-body">
+                            <h5 class="card-title">5 Ways to Boost Your Immunity</h5>
+                            <p class="card-text">Simple lifestyle changes that can help strengthen your immune system naturally.</p>
+                            <a href="#" class="btn btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Health Tip">
+                        <div class="card-body">
+                            <h5 class="card-title">Managing Stress in Daily Life</h5>
+                            <p class="card-text">Effective techniques to reduce stress and improve mental wellbeing.</p>
+                            <a href="#" class="btn btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Health Tip">
+                        <div class="card-body">
+                            <h5 class="card-title">Nutrition for a Healthy Heart</h5>
+                            <p class="card-text">Foods that promote cardiovascular health and reduce heart disease risk.</p>
+                            <a href="#" class="btn btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Appointments Section -->
+        <section id="appointments" class="container mb-5">
+            <h2 class="section-title">Book Appointments with Our Doctors</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Book appointments with our experienced doctors across various specialties.</p>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</button>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Appointment" class="img-fluid">
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h4 class="mb-3">My Appointments</h4>
+                <div id="myAppointments" class="bg-white rounded p-3"></div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="container mb-5">
+            <h2 class="section-title">About Us</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p>We are a team of healthcare professionals dedicated to providing the best medical services to our patients.</p>
+                    <p>Our mission is to make healthcare accessible and affordable for everyone.</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="About Us" class="img-fluid">
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="container mb-5">
+            <h2 class="section-title">Get in Touch with Us</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Have any questions or concerns? Feel free to reach out to us.</p>
+                    <p>Contact Us: <a href="mailto:info@midcare.com">info@midcare.com</a></p>
+                    <p>Phone: +91 98765 43210</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Contact Us" class="img-fluid">
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="container mb-5">
+            <h2 class="section-title">Your Profile</h2>
+            <div class="profile-section">
+                <p class="mb-2"><strong>Name:</strong> <span id="profileName">Guest</span></p>
+                <p class="mb-2"><strong>Email:</strong> <span id="profileEmail">-</span></p>
+                <p class="mb-2"><strong>Blood Group:</strong> <span id="profileBlood">-</span></p>
+                <p class="mb-0 text-muted">Login to view and edit your profile details.</p>
+            </div>
+        </section>
+
+        <!-- Orders Section -->
+        <section id="orders" class="container mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="section-title mb-0">My Orders</h2>
+                <button class="btn btn-outline-primary btn-sm" onclick="loadMyOrders()">
+                    <i class="fas fa-sync-alt me-1"></i> Refresh Orders
+                </button>
+            </div>
+            <div class="profile-section">
+                <div id="myOrders" class="bg-white rounded p-3"></div>
+            </div>
+        </section>
+
+        <!-- Cart Section -->
+        <section id="cart" class="container mb-5">
+            <h2 class="section-title">Your Cart</h2>
+            <div class="cart-summary-card">
+                <div id="cartItems"></div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <strong>Total:</strong>
+                    <span id="cartTotal">₹0</span>
+                </div>
+                <div class="mt-3 d-flex gap-2">
+                    <button class="btn btn-outline-secondary btn-sm" id="clearCartBtn"><i class="fas fa-trash me-1"></i> Clear Cart</button>
+                    <a href="#pharmacy" class="btn btn-outline-primary btn-sm"><i class="fas fa-arrow-left me-1"></i> Continue Shopping</a>
+                    <button class="btn btn-primary btn-sm" id="placeOrderBtn"><i class="fas fa-bag-shopping me-1"></i> Place Order</button>
+                    <button class="btn btn-success btn-sm" id="checkoutBtn"><i class="fas fa-credit-card me-1"></i> Checkout</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Doctor Detail Modal -->
+    <div class="modal fade" id="doctorDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background: var(--gradient-primary); color: #fff;">
+                    <h5 class="modal-title" id="doctorDetailName">Doctor Profile</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <div class="col-md-5">
+                            <img id="doctorDetailImg" class="img-fluid rounded" alt="Doctor">
+                        </div>
+                        <div class="col-md-7">
+                            <p class="mb-2"><strong>Specialty:</strong> <span id="doctorDetailSpecialty"></span></p>
+                            <p class="mb-2"><strong>Hospital:</strong> <span id="doctorDetailHospital"></span></p>
+                            <p class="mb-2"><strong>Experience:</strong> <span id="doctorDetailExperience"></span></p>
+                            <p class="mb-3"><strong>Rating:</strong> <span id="doctorDetailRating"></span> ⭐</p>
+                            <p class="mb-3"><strong>Availability:</strong> <span id="doctorDetailAvailability"></span></p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5><i class="fas fa-heartbeat me-2"></i>MidCare</h5>
+                    <p>Your trusted partner in healthcare. We connect you with the best medical professionals and provide easy access to genuine medicines.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 footer-links">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#doctors">Doctors</a></li>
+                        <li><a href="#pharmacy">Pharmacy</a></li>
+                        <li><a href="#appointments">Appointments</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 footer-links">
+                    <h5>Medical Services</h5>
+                    <ul>
+                        <li><a href="#">Cardiology</a></li>
+                        <li><a href="#">Dermatology</a></li>
+                        <li><a href="#">Neurology</a></li>
+                        <li><a href="#">Orthopedics</a></li>
+                        <li><a href="#">Pediatrics</a></li>
+                        <li><a href="#">Gastroenterology</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 footer-links">
+                    <h5>Contact Us</h5>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Healthcare Ave, Mumbai, India</li>
+                        <li><i class="fas fa-phone me-2"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@midcare.com</li>
+                        <li><i class="fas fa-clock me-2"></i> Mon-Sun: 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 MidCare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-button" id="chatbotToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <img src="{% static 'assets/chatbot-logo.svg' %}" alt="Chatbot logo" class="chat-logo">
+                <div class="flex-grow-1">
+                    <h6 class="mb-0">MidCare Assistant</h6>
+                    <small>How can I help you today?</small>
+                </div>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Hello! I'm your MidCare assistant. How can I help you with your healthcare needs today?
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="chatbotInput" placeholder="Type your message...">
+                    <button class="btn btn-primary" id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content login-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to Your Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content signup-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Your Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signupForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="signupFirstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="signupFirstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="signupLastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="signupLastName" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="signupEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signupPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="signupConfirmPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">I agree to the <a href="#">Terms and Conditions</a></label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Create Account</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointment Modal -->
+    <div class="modal fade" id="appointmentModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content appointment-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="appointmentDoctorName">Book Appointment</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="appointmentForm">
+                        <div class="mb-3">
+                            <label class="form-label">Clinic Location</label>
+                            <div class="ratio ratio-16x9">
+                                <iframe
+                                    src="https://www.google.com/maps?q=India&output=embed"
+                                    id="doctorLocationMap"
+                                    style="border:0;"
+                                    allowfullscreen=""
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appointmentDate" class="form-label">Preferred Date</label>
+                            <input type="date" class="form-control" id="appointmentDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appointmentTime" class="form-label">Preferred Time</label>
+                            <select class="form-select" id="appointmentTime" required>
+                                <option value="">Select Time</option>
+                                <option>10:00 AM</option>
+                                <option>11:00 AM</option>
+                                <option>12:00 PM</option>
+                                <option>2:00 PM</option>
+                                <option>3:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appointmentReason" class="form-label">Reason for Visit</label>
+                            <textarea class="form-control" id="appointmentReason" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Book Appointment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderSuccessModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-circle-check me-2"></i>Order Placed</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="orderSuccessBody"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#orders" class="btn btn-primary" data-bs-dismiss="modal">View My Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        // Sample data for doctors and medicines with Indian context
+        let doctors = [];
+
+        // Medicines will be loaded dynamically from the Django backend
+        let medicines = [];
+        let medicinesFilterType = 'All';
+        let medicinesSearchTerm = '';
+
+        // User state
+        let currentUser = null;
+        let userCart = [];
+        let userProfile = null;
+        let selectedDoctorId = null;
+        let csrfToken = '';
+
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const userSection = document.getElementById('userSection');
+        const userName = document.getElementById('userName');
+        const cartCount = document.getElementById('cartCount');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        const signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+        const appointmentModal = new bootstrap.Modal(document.getElementById('appointmentModal'));
+        const showSignup = document.getElementById('showSignup');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const appointmentForm = document.getElementById('appointmentForm');
+        const doctorsList = document.getElementById('doctorsList');
+        const medicinesList = document.getElementById('medicinesList');
+        const diseaseCategories = document.querySelectorAll('.disease-category');
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchDoctorsFromDb().finally(() => loadDoctors('all'));
+            loadMedicines();
+            ensureCsrf();
+            checkLoginStatus();
+            setupRouter();
+
+            ['doctors','pharmacy','appointments','about','contact','profile','orders','cart'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.classList.add('animate-in');
+            });
+            
+            // Event listeners
+            loginBtn.addEventListener('click', () => loginModal.show());
+            signupBtn.addEventListener('click', () => signupModal.show());
+
+            document.querySelectorAll('.btn.btn-primary').forEach(b => b.classList.add('pulse'));
+            showSignup.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.hide();
+                signupModal.show();
+            });
+
+        async function fetchDoctorsFromDb(){
+            try {
+                const res = await fetch('/api/doctors/', { credentials: 'same-origin' });
+                const data = await res.json().catch(() => ({}));
+                if(!res.ok || !data.ok || !Array.isArray(data.doctors) || !data.doctors.length) return;
+                doctors = data.doctors.map(d => ({
+                    id: d.id,
+                    name: d.name,
+                    specialty: (d.specialty || '').toLowerCase(),
+                    hospital: d.hospital || '',
+                    experience: d.experience ? `${d.experience} Years` : '',
+                    rating: Number(d.rating) || 0,
+                    availability: d.availability || '',
+                    image: d.image || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80'
+                }));
+            } catch(e){
+                return;
+            }
+        }
+
+        // Simple hash-based router to show sections like separate pages
+        function setupRouter(){
+            const pages = ['home','doctors','pharmacy','appointments','about','contact','profile','orders','cart'];
+            function setActive(href){
+                document.querySelectorAll('.nav-link').forEach(a=>{
+                    a.classList.toggle('active', a.getAttribute('href') === '#' + href);
+                });
+            }
+            function showPage(page){
+                // Hide all target sections
+                pages.forEach(id=>{
+                    const el = document.getElementById(id);
+                    if(el) el.classList.add('hidden');
+                });
+                // Also hide home group parts
+                document.getElementById('home-features')?.classList.add('hidden');
+                document.getElementById('home-tips')?.classList.add('hidden');
+
+                if(page === 'home'){
+                    document.getElementById('home')?.classList.remove('hidden');
+                    document.getElementById('home-features')?.classList.remove('hidden');
+                    document.getElementById('home-tips')?.classList.remove('hidden');
+                } else {
+                    // Always keep hero hidden when not on home
+                    document.getElementById('home')?.classList.add('hidden');
+                    const target = document.getElementById(page);
+                    if(target){
+                        target.classList.remove('hidden');
+                        target.classList.add('page-transition');
+                        setTimeout(()=> target.classList.remove('page-transition'), 360);
+                    }
+                }
+                setActive(page);
+                window.scrollTo({top:0, behavior:'smooth'});
+            }
+            function current(){
+                const hash = (location.hash || '#home').slice(1);
+                return hash;
+            }
+            window.addEventListener('hashchange', ()=> showPage(current()));
+            // Initial
+            if(!location.hash) location.hash = '#home';
+            showPage(current());
+        }
+            showLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                signupModal.hide();
+                loginModal.show();
+            });
+            logoutBtn.addEventListener('click', handleLogout);
+            loginForm.addEventListener('submit', handleLogin);
+            signupForm.addEventListener('submit', handleSignup);
+            appointmentForm.addEventListener('submit', handleAppointment);
+            
+            // Disease category filtering
+            diseaseCategories.forEach(category => {
+                category.addEventListener('click', function() {
+                    diseaseCategories.forEach(c => c.classList.remove('active-category'));
+                    this.classList.add('active-category');
+                    loadDoctors(this.dataset.disease);
+                });
+            });
+
+            // Pharmacy category filtering
+            document.querySelectorAll('.medicine-category').forEach(btn => {
+                btn.addEventListener('click', function(){
+                    document.querySelectorAll('.medicine-category').forEach(b=> b.classList.remove('active-category'));
+                    this.classList.add('active-category');
+                    medicinesFilterType = this.dataset.type || 'All';
+                    renderMedicines();
+                });
+            });
+            
+            // Chatbot functionality
+            chatbotToggle.addEventListener('click', toggleChatbot);
+            chatbotSend.addEventListener('click', sendChatMessage);
+            chatbotInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendChatMessage();
+                }
+            });
+            
+            // Medicine category filtering (by type)
+            const medicineFilterButtons = document.querySelectorAll('.category-filter-btn');
+            medicineFilterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    medicineFilterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    medicinesFilterType = this.textContent.trim() || 'All';
+                    renderMedicines();
+                });
+            });
+
+            // Medicine search box (by name / manufacturer / description)
+            const medicineSearchInput = document.querySelector('#pharmacy .search-box');
+            if (medicineSearchInput) {
+                medicineSearchInput.addEventListener('input', function() {
+                    medicinesSearchTerm = this.value.toLowerCase();
+                    renderMedicines();
+                });
+            }
+        });
+
+        // Load doctors based on disease category
+        function loadDoctors(disease) {
+            doctorsList.innerHTML = '';
+            
+            const filteredDoctors = disease === 'all' 
+                ? doctors 
+                : doctors.filter(doctor => doctor.specialty.toLowerCase() === disease);
+            
+            if (filteredDoctors.length === 0) {
+                doctorsList.innerHTML = '<div class="col-12 text-center"><p>No doctors found for this specialty.</p></div>';
+                return;
+            }
+            
+            filteredDoctors.forEach(doctor => {
+                const doctorCard = document.createElement('div');
+                doctorCard.className = 'col-md-6 col-lg-4';
+                doctorCard.innerHTML = `
+                    <div class="card doctor-card">
+                        <img src="${doctor.image}" class="card-img-top" alt="${doctor.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${doctor.name}</h5>
+                            <p class="card-text text-muted">${doctor.specialty}</p>
+                            <p class="card-text small text-muted">${doctor.hospital}</p>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge-custom">${doctor.experience}</span>
+                                <span class="rating">
+                                    <i class="fas fa-star"></i> ${doctor.rating}
+                                </span>
+                            </div>
+                            <p class="card-text"><small class="text-muted">Available: ${doctor.availability}</small></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary btn-sm book-appointment" data-doctor-id="${doctor.id}" data-doctor-name="${doctor.name}">
+                                    Book Appointment
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm view-profile" data-doctor-id="${doctor.id}">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                doctorsList.appendChild(doctorCard);
+            });
+            
+            // Add event listeners to book appointment buttons
+            document.querySelectorAll('.book-appointment').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!currentUser) {
+                        loginModal.show();
+                        return;
+                    }
+                    
+                    const doctorId = this.dataset.doctorId;
+                    const doctorName = this.dataset.doctorName;
+                    selectedDoctorId = doctorId;
+                    document.getElementById('appointmentDoctorName').textContent = `Book Appointment with ${doctorName}`;
+                    const d = doctors.find(doc => String(doc.id) === String(doctorId));
+                    updateAppointmentTimeOptions(d);
+                    updateDoctorLocationMap(d);
+                    appointmentModal.show();
+                });
+            });
+
+            // Add event listeners to view profile buttons
+            document.querySelectorAll('.view-profile').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.doctorId);
+                    const d = doctors.find(doc => doc.id === id);
+                    if(!d) return;
+                    document.getElementById('doctorDetailName').textContent = d.name;
+                    document.getElementById('doctorDetailImg').src = d.image;
+                    document.getElementById('doctorDetailSpecialty').textContent = d.specialty;
+                    document.getElementById('doctorDetailHospital').textContent = d.hospital;
+                    document.getElementById('doctorDetailExperience').textContent = d.experience;
+                    document.getElementById('doctorDetailRating').textContent = d.rating;
+                    document.getElementById('doctorDetailAvailability').textContent = d.availability;
+                    new bootstrap.Modal(document.getElementById('doctorDetailModal')).show();
+                });
+            });
+        }
+
+        // Load medicines from the backend (dynamic)
+        async function loadMedicines() {
+            medicinesList.innerHTML = '<div class="col-12 text-center"><p>Loading medicines...</p></div>';
+            try {
+                const response = await fetch('/api/medicines/');
+                if (!response.ok) {
+                    throw new Error('Failed to load medicines');
+                }
+                medicines = await response.json();
+            } catch (error) {
+                console.error('Error fetching medicines:', error);
+                medicinesList.innerHTML = '<div class="col-12 text-center text-danger"><p>Unable to load medicines. Please try again later.</p></div>';
+                return;
+            }
+            renderMedicines();
+        }
+
+        function safeMapQuery(text){
+            return encodeURIComponent((text || '').trim() || 'India');
+        }
+
+        function updateDoctorLocationMap(doctor){
+            const iframe = document.getElementById('doctorLocationMap');
+            if(!iframe) return;
+            const q = safeMapQuery(doctor?.hospital || doctor?.name || 'India');
+            iframe.src = `https://www.google.com/maps?q=${q}&output=embed`;
+        }
+
+        function medicineFallbackImage(medicine){
+            const id = Number(medicine?.id) || 0;
+            const pool = [
+                'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1586015559304-cf4449b7b351?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80'
+            ];
+            return pool[id % pool.length];
+        }
+
+        function formatAddress(addr){
+            const parts = [addr?.line1, addr?.line2, addr?.city, addr?.state, addr?.postal_code, addr?.country].filter(Boolean);
+            return parts.join(', ');
+        }
+
+        function embedMapForQuery(query){
+            const q = safeMapQuery(query);
+            return `https://www.google.com/maps?q=${q}&output=embed`;
+        }
+
+        async function loadMyOrders(){
+            const el = document.getElementById('myOrders');
+            if(!el) return;
+            if(!currentUser){
+                el.innerHTML = '<p class="mb-0 text-muted">Login to view your orders.</p>';
+                return;
+            }
+            el.innerHTML = '<p class="mb-0">Loading orders...</p>';
+            try {
+                const res = await fetch('/api/my-orders/', { credentials: 'same-origin' });
+                const data = await res.json().catch(() => ({}));
+                console.log('Orders API response:', data); // Debug log
+                
+                if(!res.ok || !data.ok){
+                    console.log('API Error:', res.status, data); // Debug log
+                    el.innerHTML = '<p class="mb-0 text-danger">Unable to load orders.</p>';
+                    return;
+                }
+                const orders = Array.isArray(data.orders) ? data.orders : [];
+                console.log('Orders array:', orders); // Debug log
+                
+                if(!orders.length){
+                    el.innerHTML = '<p class="mb-0 text-muted">No orders yet.</p>';
+                    return;
+                }
+
+                el.innerHTML = orders.map(o => {
+                    const addressText = formatAddress(o.shipping_address);
+                    const mapSrc = embedMapForQuery(addressText || 'India');
+                    
+                    // Status color mapping
+                    const statusColors = {
+                        'pending': 'warning',
+                        'confirmed': 'info',
+                        'preparing': 'primary',
+                        'at_service': 'secondary',
+                        'out_for_delivery': 'success',
+                        'delivered': 'success',
+                        'cancelled': 'danger',
+                        'returned': 'secondary'
+                    };
+                    
+                    const statusColor = statusColors[o.status] || 'secondary';
+                    const paymentColor = o.payment_status === 'paid' ? 'success' : 'warning';
+                    
+                    return `
+                        <div class="card mb-3 animate-in">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                                    <div>
+                                        <h5 class="mb-1">Order #${o.id}</h5>
+                                        <div class="small text-muted">Placed: ${o.created_at ? new Date(o.created_at).toLocaleString() : '-'}</div>
+                                        ${o.updated_at && o.updated_at !== o.created_at ? `<div class="small text-muted">Updated: ${new Date(o.updated_at).toLocaleString()}</div>` : ''}
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="badge bg-${statusColor}">${(o.status || 'pending').replace('_', ' ').toUpperCase()}</span>
+                                        <span class="badge bg-${paymentColor} ms-1">${(o.payment_status || 'pending').toUpperCase()}</span>
+                                        <div class="mt-1"><strong>Rs.${o.total_amount}</strong></div>
+                                    </div>
+                                </div>
+                                
+                                ${o.delivery_time_estimate ? `
+                                    <div class="mt-2 p-2 bg-light rounded">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class="fas fa-clock text-primary"></i>
+                                            <span class="small fw-bold">Delivery Estimate: ${o.delivery_time_estimate}</span>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${o.delivery_notes ? `
+                                    <div class="mt-2 p-2 bg-info bg-opacity-10 rounded">
+                                        <div class="d-flex align-items-start gap-2">
+                                            <i class="fas fa-info-circle text-info mt-1"></i>
+                                            <div>
+                                                <span class="small fw-bold text-info">Delivery Update:</span>
+                                                <div class="small">${o.delivery_notes}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${o.items && o.items.length > 0 ? `
+                                    <div class="mt-3">
+                                        <h6 class="mb-2">Order Items (${o.items.length})</h6>
+                                        <div class="bg-light rounded p-2" style="max-height: 200px; overflow-y: auto;">
+                                            ${o.items.map(item => `
+                                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                                                    <div class="d-flex align-items-center gap-3">
+                                                        <div class="text-muted small">Qty: ${item.quantity}</div>
+                                                        <div>
+                                                            <div class="fw-bold">${item.medicine_name}</div>
+                                                            <div class="small text-muted">${item.medicine_manufacturer || ''}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-end">
+                                                        <div class="fw-bold">Rs.${item.unit_price}</div>
+                                                        <div class="small text-muted">Total: Rs.${item.total_price}</div>
+                                                    </div>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                <div class="mt-3">
+                                    <div class="small text-muted mb-1">Delivery Location</div>
+                                    <div>${addressText || '-'}</div>
+                                    <div class="ratio ratio-16x9 mt-2">
+                                        <iframe src="${mapSrc}" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch(e){
+                el.innerHTML = '<p class="mb-0 text-danger">Unable to load orders.</p>';
+            }
+        }
+
+        // Render medicines applying current filters/search
+        function renderMedicines() {
+            if (!medicines || !medicines.length) {
+                medicinesList.innerHTML = '<div class="col-12 text-center"><p>No medicines available.</p></div>';
+                return;
+            }
+
+            const typeFilter = (medicinesFilterType || 'All').toLowerCase();
+            const search = (medicinesSearchTerm || '').toLowerCase();
+
+            const filtered = medicines.filter(med => {
+                const typeOk = typeFilter === 'all' || (med.type || '').toLowerCase() === typeFilter;
+                if (!typeOk) return false;
+                if (!search) return true;
+                const name = (med.name || '').toLowerCase();
+                const manufacturer = (med.manufacturer || '').toLowerCase();
+                const description = (med.description || '').toLowerCase();
+                return (
+                    name.includes(search) ||
+                    manufacturer.includes(search) ||
+                    description.includes(search)
+                );
+            });
+
+            if (!filtered.length) {
+                medicinesList.innerHTML = '<div class="col-12 text-center"><p>No medicines available in this category.</p></div>';
+                return;
+            }
+
+            medicinesList.innerHTML = '';
+            
+            filtered.forEach(medicine => {
+                const price = Number(medicine.price) || 0;
+                const fallbackImg = medicineFallbackImage(medicine);
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4 col-xl-3';
+                card.innerHTML = `
+                    <div class="card medicine-card h-100">
+                        <img src="${medicine.image_url || fallbackImg}" class="card-img-top" alt="${medicine.name}" onerror="this.onerror=null;this.src='${fallbackImg}';">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">${medicine.name}</h5>
+                            <p class="card-text small text-muted">${medicine.manufacturer || ''}</p>
+                            <p class="card-text flex-grow-1">${medicine.description || ''}</p>
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <span class="price-tag">₹${price}</span>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-outline-primary btn-sm add-to-cart" data-medicine-id="${medicine.id}">
+                                        <i class="fas fa-cart-plus"></i> Add to Cart
+                                    </button>
+                                    <button class="btn btn-primary btn-sm buy-now" data-medicine-id="${medicine.id}">
+                                        <i class="fas fa-bolt"></i> Buy Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                medicinesList.appendChild(card);
+            });
+            
+            // Add event listeners to add to cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!currentUser) {
+                        loginModal.show();
+                        return;
+                    }
+                    
+                    const medicineId = parseInt(this.dataset.medicineId);
+                    addToCart(medicineId);
+                });
+            });
+
+            // Buy now buttons
+            document.querySelectorAll('.buy-now').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!currentUser) {
+                        loginModal.show();
+                        return;
+                    }
+                    const medicineId = parseInt(this.dataset.medicineId);
+                    buyNow(medicineId);
+                });
+            });
+        }
+
+        // Handle login
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                showAlert('Email and password are required', 'error');
+                return;
+            }
+
+            try {
+                await ensureCsrf();
+                const response = await fetch('/api/login/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok || !data.ok) {
+                    showAlert(data.error || 'Invalid email or password', 'error');
+                    return;
+                }
+                await checkLoginStatus();
+                loginModal.hide();
+                showAlert('Login successful!', 'success');
+            } catch (err) {
+                showAlert('Unable to login. Please try again.', 'error');
+            }
+        }
+
+        // Handle signup
+        async function handleSignup(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('signupFirstName').value;
+            const lastName = document.getElementById('signupLastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showAlert('Passwords do not match', 'error');
+                return;
+            }
+            
+            try {
+                await ensureCsrf();
+                // Send OTP to email
+                const otpRes = await fetch('/api/send-otp', {
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    credentials: 'same-origin',
+                    body: JSON.stringify({email})
+                });
+                const otpJson = await otpRes.json().catch(() => ({}));
+                if(!otpRes.ok || !otpJson.ok){
+                    showAlert(otpJson.error || 'Unable to send OTP. Please try again.', 'error');
+                    return;
+                }
+
+                const code = (window.prompt('An OTP has been sent to your email. Please enter the 6-digit code:') || '').trim();
+                if(!code){ showAlert('Signup cancelled. OTP not provided.', 'error'); return; }
+                const signupRes = await fetch('/api/signup/', {
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        first_name: firstName,
+                        last_name: lastName,
+                        email,
+                        password,
+                        otp: code
+                    })
+                });
+                const signupJson = await signupRes.json().catch(() => ({}));
+                if(!signupRes.ok || !signupJson.ok){
+                    showAlert(signupJson.error || 'Unable to create account', 'error');
+                    return;
+                }
+            } catch(err){
+                showAlert('Unable to create account. Please try again.', 'error');
+                return;
+            }
+
+            await checkLoginStatus();
+            signupModal.hide();
+            showAlert('Account created successfully!', 'success');
+        }
+
+        // Handle logout
+        async function handleLogout() {
+            try {
+                await ensureCsrf();
+                await fetch('/api/logout/', {
+                    method: 'POST',
+                    headers: { 'X-CSRFToken': csrfToken },
+                    credentials: 'same-origin'
+                });
+            } catch (e) {
+                // Ignore
+            }
+            currentUser = null;
+            userCart = [];
+            userProfile = null;
+            updateUI();
+            showAlert('Logged out successfully', 'success');
+        }
+
+        // Handle appointment booking
+        async function handleAppointment(e) {
+            e.preventDefault();
+            if (!currentUser) return;
+            
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('appointmentTime').value;
+            const reason = document.getElementById('appointmentReason').value;
+            if (!selectedDoctorId) {
+                showAlert('Please select a doctor first.', 'error');
+                return;
+            }
+
+            try {
+                await ensureCsrf();
+                const response = await fetch('/api/appointments/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        doctor_id: selectedDoctorId,
+                        date,
+                        time,
+                        reason
+                    })
+                });
+
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok || !data.ok) {
+                    const status = response.status;
+                    showAlert((data && data.error) ? data.error : `Unable to book appointment. Please try again. (${status})`, 'error');
+                    return;
+                }
+
+                appointmentModal.hide();
+                showAlert('Appointment booked successfully!', 'success');
+                document.getElementById('appointmentForm').reset();
+                selectedDoctorId = null;
+                await loadMyAppointments();
+            } catch (err) {
+                showAlert(err?.message || 'Unable to book appointment. Please try again.', 'error');
+            }
+        }
+
+        function updateAppointmentTimeOptions(doctor){
+            const timeEl = document.getElementById('appointmentTime');
+            if(!timeEl) return;
+
+            const fallback = [
+                { v: '09:00', t: '09:00 AM' },
+                { v: '10:00', t: '10:00 AM' },
+                { v: '11:00', t: '11:00 AM' },
+                { v: '12:00', t: '12:00 PM' },
+                { v: '14:00', t: '02:00 PM' },
+                { v: '15:00', t: '03:00 PM' },
+            ];
+
+            let slots = fallback;
+            const availability = (doctor?.availability || '').trim();
+            const m = availability.match(/(\d{1,2})\s*(AM|PM)\s*[-to]+\s*(\d{1,2})\s*(AM|PM)/i);
+            if(m){
+                const sh = Number(m[1]);
+                const sMer = m[2].toUpperCase();
+                const eh = Number(m[3]);
+                const eMer = m[4].toUpperCase();
+                const start = (sMer === 'PM' && sh !== 12) ? sh + 12 : (sMer === 'AM' && sh === 12 ? 0 : sh);
+                const end = (eMer === 'PM' && eh !== 12) ? eh + 12 : (eMer === 'AM' && eh === 12 ? 0 : eh);
+                const generated = [];
+                for(let h = start; h <= end; h++){
+                    const v = String(h).padStart(2,'0') + ':00';
+                    const displayH = ((h % 12) || 12);
+                    const mer = h >= 12 ? 'PM' : 'AM';
+                    generated.push({ v, t: `${String(displayH).padStart(2,'0')}:00 ${mer}` });
+                }
+                if(generated.length) slots = generated;
+            }
+
+            timeEl.innerHTML = '<option value="">Select a time</option>' + slots.map(s=> `<option value="${s.v}">${s.t}</option>`).join('');
+        }
+
+        async function loadMyAppointments(){
+            const el = document.getElementById('myAppointments');
+            if(!el) return;
+            if(!currentUser){
+                el.innerHTML = '<p class="text-muted mb-0">Login to view your appointments.</p>';
+                return;
+            }
+            try {
+                const res = await fetch('/api/my-appointments/', { credentials: 'same-origin' });
+                const data = await res.json().catch(() => ({}));
+                if(!res.ok || !data.ok){
+                    el.innerHTML = '<p class="text-muted mb-0">Unable to load appointments.</p>';
+                    return;
+                }
+                const appts = Array.isArray(data.appointments) ? data.appointments : [];
+                if(!appts.length){
+                    el.innerHTML = '<p class="text-muted mb-0">No appointments booked yet.</p>';
+                    return;
+                }
+
+                el.innerHTML = appts.map(a => {
+                    const dname = a.doctor?.name || 'Doctor';
+                    const spec = a.doctor?.specialty ? ` • ${a.doctor.specialty}` : '';
+                    const when = `${a.date || ''} ${a.time || ''}`.trim();
+                    const status = a.status || '';
+                    const reason = a.reason || '';
+                    return `
+                        <div class="border-bottom py-2">
+                            <div class="fw-semibold text-dark">${dname}${spec}</div>
+                            <div class="small text-muted">${when} ${status ? `• ${status}` : ''}</div>
+                            ${reason ? `<div class="small text-dark">Reason: ${reason}</div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+            } catch(e){
+                el.innerHTML = '<p class="text-muted mb-0">Unable to load appointments.</p>';
+            }
+        }
+
+        // Add item to cart
+        function addToCart(medicineId) {
+            if (!currentUser) return;
+            
+            const medicine = medicines.find(m => m.id === medicineId);
+            if (!medicine) return;
+            
+            const existingItem = userCart.find(item => item.id === medicineId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                userCart.push({
+                    id: medicine.id,
+                    name: medicine.name,
+                    price: medicine.price,
+                    image: medicine.image_url || '',
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem(`midcare_cart_${currentUser.id}`, JSON.stringify(userCart));
+            updateCartUI();
+            showAlert(`${medicine.name} added to cart`, 'success');
+        }
+
+        // Update UI based on login status
+        function updateUI() {
+            if (currentUser) {
+                loginBtn.classList.add('hidden');
+                signupBtn.classList.add('hidden');
+                userSection.classList.remove('hidden');
+                userName.textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+                updateCartUI();
+                updateProfileSection();
+                loadMyOrders();
+            } else {
+                loginBtn.classList.remove('hidden');
+                signupBtn.classList.remove('hidden');
+                userSection.classList.add('hidden');
+                updateProfileSection();
+                updateCartSection();
+                loadMyOrders();
+            }
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            if (!currentUser) return;
+            
+            cartCount.textContent = userCart.reduce((total, item) => total + item.quantity, 0);
+            updateCartSection();
+        }
+
+        // Render profile section
+        function updateProfileSection(){
+            const nameEl = document.getElementById('profileName');
+            const emailEl = document.getElementById('profileEmail');
+            const bloodEl = document.getElementById('profileBlood');
+            if(currentUser){
+                nameEl.textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+                emailEl.textContent = currentUser.email;
+                const p = userProfile || createDefaultProfile(currentUser);
+                bloodEl.textContent = p.bloodGroup || '-';
+            } else {
+                nameEl.textContent = 'Guest';
+                emailEl.textContent = '-';
+                bloodEl.textContent = '-';
+            }
+        }
+
+        // Render cart section
+        function updateCartSection(){
+            const itemsEl = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotal');
+            if(!currentUser){
+                itemsEl.innerHTML = '<p class="text-muted mb-0">Login to view your cart.</p>';
+                totalEl.textContent = '₹0';
+                return;
+            }
+            if(!userCart.length){
+                itemsEl.innerHTML = '<p class="text-muted mb-0">Your cart is empty.</p>';
+                totalEl.textContent = '₹0';
+                return;
+            }
+            let total = 0;
+            itemsEl.innerHTML = userCart.map(it => {
+                const line = it.price * it.quantity;
+                total += line;
+                return `
+                <div class=\"d-flex justify-content-between align-items-center cart-item\">
+                    <div class=\"d-flex align-items-center\">
+                        <span class=\"me-2\">${it.name}</span>
+                        <div class=\"btn-group btn-group-sm\" role=\"group\">
+                            <button class=\"btn btn-outline-secondary qty-dec\" data-id=\"${it.id}\">-</button>
+                            <span class=\"px-2\">${it.quantity}</span>
+                            <button class=\"btn btn-outline-secondary qty-inc\" data-id=\"${it.id}\">+</button>
+                        </div>
+                    </div>
+                    <div>
+                        <strong>₹${line}</strong>
+                        <button class=\"btn btn-link text-danger btn-sm ms-2 remove-item\" data-id=\"${it.id}\"><i class=\"fas fa-trash\"></i></button>
+                    </div>
+                </div>`;
+            }).join('');
+            totalEl.textContent = `₹${total}`;
+
+            // Wire item controls
+            itemsEl.querySelectorAll('.qty-inc').forEach(btn => btn.addEventListener('click', () => changeQty(parseInt(btn.dataset.id), 1)));
+            itemsEl.querySelectorAll('.qty-dec').forEach(btn => btn.addEventListener('click', () => changeQty(parseInt(btn.dataset.id), -1)));
+            itemsEl.querySelectorAll('.remove-item').forEach(btn => btn.addEventListener('click', () => removeFromCart(parseInt(btn.dataset.id))));
+
+            // Global cart actions
+            document.getElementById('clearCartBtn')?.addEventListener('click', clearCart);
+            document.getElementById('checkoutBtn')?.addEventListener('click', checkout);
+            document.getElementById('placeOrderBtn')?.addEventListener('click', openOrderModal);
+        }
+
+        // Change quantity helper
+        function changeQty(id, delta){
+            const item = userCart.find(x => x.id === id);
+            if(!item) return;
+            item.quantity = Math.max(1, item.quantity + delta);
+            localStorage.setItem(`midcare_cart_${currentUser.id}`, JSON.stringify(userCart));
+            updateCartUI();
+        }
+
+        function removeFromCart(id){
+            userCart = userCart.filter(x => x.id !== id);
+            localStorage.setItem(`midcare_cart_${currentUser.id}`, JSON.stringify(userCart));
+            updateCartUI();
+        }
+
+        function clearCart(){
+            if(!currentUser) return;
+            userCart = [];
+            localStorage.setItem(`midcare_cart_${currentUser.id}`, JSON.stringify(userCart));
+            updateCartUI();
+            showAlert('Cart cleared', 'success');
+        }
+
+        function checkout(){
+            if(!currentUser || !userCart.length) return;
+            // Simulate order placement
+            const total = userCart.reduce((s,i)=> s + i.price*i.quantity, 0);
+            userCart = [];
+            localStorage.setItem(`midcare_cart_${currentUser.id}`, JSON.stringify(userCart));
+            updateCartUI();
+            showAlert(`Order placed successfully! Total: ₹${total}`, 'success');
+        }
+
+        function buyNow(medicineId){
+            const med = medicines.find(m=> m.id === medicineId);
+            if(!med) return;
+            if(!currentUser){ loginModal.show(); return; }
+            addToCart(medicineId);
+            location.hash = '#cart';
+            openOrderModal();
+        }
+
+        // Place order modal handlers
+        let orderModalInstance;
+        function openOrderModal(){
+            if(!currentUser){ loginModal.show(); return; }
+            if(!userCart.length){ showAlert('Your cart is empty.', 'error'); return; }
+            const orderSummary = document.getElementById('orderSummary');
+            const total = userCart.reduce((s,i)=> s + i.price*i.quantity, 0);
+            orderSummary.textContent = `Items: ${userCart.length} • Total: ₹${total}`;
+            document.getElementById('orderName').value = `${currentUser.firstName} ${currentUser.lastName}`;
+            document.getElementById('orderEmail').value = currentUser.email;
+            orderModalInstance = new bootstrap.Modal(document.getElementById('orderModal'));
+            orderModalInstance.show();
+        }
+
+        const orderFormEl = document.getElementById('orderForm');
+        orderFormEl?.addEventListener('submit', async function(e){
+            e.preventDefault();
+            if(!currentUser) return;
+            if(!userCart.length){ showAlert('Your cart is empty.', 'error'); return; }
+
+            if(!orderFormEl.checkValidity()){
+                orderFormEl.reportValidity();
+                return;
+            }
+
+            const rawTotal = userCart.reduce((s,i)=> s + (Number(i.price) || 0) * (Number(i.quantity) || 0), 0);
+            const coupon = (document.getElementById('orderCoupon')?.value || '').trim().toUpperCase();
+            const discount = coupon === 'SAVE10' ? Math.round(rawTotal * 0.10) : 0;
+            const total = Math.max(0, rawTotal - discount);
+
+            const paymentMethod = document.getElementById('orderPayment').value;
+            if(paymentMethod === 'UPI'){
+                const upi = (document.getElementById('orderUpiId')?.value || '').trim();
+                if(!upi){ showAlert('Please enter your UPI ID.', 'error'); return; }
+            }
+            if(paymentMethod === 'Card'){
+                const cardNum = (document.getElementById('orderCardNumber')?.value || '').replace(/\s+/g,'');
+                const expiry = (document.getElementById('orderCardExpiry')?.value || '').trim();
+                const cvv = (document.getElementById('orderCardCvv')?.value || '').trim();
+                if(cardNum.length < 12 || !expiry || cvv.length < 3){
+                    showAlert('Please enter valid card details.', 'error');
+                    return;
+                }
+            }
+
+            const orderPayload = {
+                items: userCart.map(it => ({
+                    medicine_id: it.id,
+                    quantity: it.quantity
+                })),
+                address: {
+                    name: document.getElementById('orderName').value,
+                    email: document.getElementById('orderEmail').value,
+                    phone: document.getElementById('orderPhone').value,
+                    address1: document.getElementById('orderAddress').value,
+                    address2: document.getElementById('orderAddress2')?.value || '',
+                    landmark: document.getElementById('orderLandmark')?.value || '',
+                    city: document.getElementById('orderCity').value,
+                    state: document.getElementById('orderState').value,
+                    pin: document.getElementById('orderPin').value,
+                    instructions: document.getElementById('orderInstructions')?.value || '',
+                    country: 'India'
+                },
+                payment: paymentMethod,
+                coupon: coupon || ''
+            };
+
+            try {
+                await ensureCsrf();
+                const res = await fetch('/api/orders/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(orderPayload)
+                });
+                const data = await res.json().catch(() => ({}));
+                if(!res.ok || !data.ok){
+                    showAlert(data.error || 'Unable to place order. Please try again.', 'error');
+                    return;
+                }
+
+                saveAddressIfRequested();
+
+                userCart = [];
+                localStorage.setItem(`midcare_cart_${currentUser.id}`, JSON.stringify(userCart));
+                updateCartUI();
+
+                orderModalInstance?.hide();
+                orderFormEl.reset();
+                updatePaymentSections();
+                if(couponStatus) couponStatus.textContent = '';
+                showAlert(`Order placed successfully! Order #${data.order.id} • Total: ₹${data.order.total}`, 'success');
+
+                await loadMyOrders();
+                const addressText = [orderPayload.address.address1, orderPayload.address.address2, orderPayload.address.city, orderPayload.address.state, orderPayload.address.pin, orderPayload.address.country].filter(Boolean).join(', ');
+                const successEl = document.getElementById('orderSuccessBody');
+                if(successEl){
+                    const mapSrc = embedMapForQuery(addressText || 'India');
+                    const itemsHTML = userCart.map(item => `
+                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="text-muted small">Qty: ${item.quantity}</div>
+                                <div>
+                                    <div class="fw-bold">${item.name}</div>
+                                    <div class="small text-muted">${item.manufacturer || ''}</div>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold">Rs.${item.price}</div>
+                                <div class="small text-muted">Total: Rs.${(item.price * item.quantity).toFixed(2)}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    successEl.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+                            <div>
+                                <div class="mb-1"><strong>Order #${data.order.id}</strong></div>
+                                <div class="small text-muted">Status: PENDING (admin can update)</div>
+                            </div>
+                            <div class="text-end">
+                                <div><strong>Total: Rs.${data.order.total}</strong></div>
+                                <div class="small text-muted">Payment: ${data.order.payment}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="mb-2">Order Items (${userCart.length})</h6>
+                            <div class="bg-light rounded p-2" style="max-height: 200px; overflow-y: auto;">
+                                ${itemsHTML}
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <div class="small text-muted mb-1">Delivery Location</div>
+                            <div>${addressText || '-'}</div>
+                            <div class="ratio ratio-16x9 mt-2">
+                                <iframe src="${mapSrc}" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                    `;
+                }
+                const successModalEl = document.getElementById('orderSuccessModal');
+                if(!successModalEl){
+                    showAlert('Order placed, but unable to open success dialog.', 'error');
+                    return;
+                }
+                new bootstrap.Modal(successModalEl).show();
+            } catch(err){
+                showAlert('Unable to place order. Please try again.', 'error');
+            }
+        });
+
+        // Checkout form enhancements
+        const orderPaymentEl = document.getElementById('orderPayment');
+        const upiSection = document.getElementById('upiSection');
+        const cardSection = document.getElementById('cardSection');
+        const applyCouponBtn = document.getElementById('applyCouponBtn');
+        const couponStatus = document.getElementById('couponStatus');
+
+        function updatePaymentSections(){
+            const method = orderPaymentEl?.value;
+            if(upiSection) upiSection.style.display = method === 'UPI' ? 'block' : 'none';
+            if(cardSection) cardSection.style.display = method === 'Card' ? 'block' : 'none';
+        }
+
+        orderPaymentEl?.addEventListener('change', updatePaymentSections);
+
+        // Simple interactive map functionality
+        const mapSearchInput = document.getElementById('mapSearchInput');
+        const searchMapBtn = document.getElementById('searchMapBtn');
+        const useMyLocationBtn = document.getElementById('useMyLocationBtn');
+        const fillAddressBtn = document.getElementById('fillAddressBtn');
+        const resetMapBtn = document.getElementById('resetMapBtn');
+        const addressMapFrame = document.getElementById('addressMapFrame');
+        
+        let currentMapLocation = 'Bangalore, India'; // Default location
+
+        // Function to update map with new location
+        function updateMapLocation(location) {
+            if (!addressMapFrame) return;
+            
+            const encodedLocation = encodeURIComponent(location);
+            const mapSrc = `https://www.google.com/maps?q=${encodedLocation}&output=embed&z=15`;
+            addressMapFrame.src = mapSrc;
+            currentMapLocation = location;
+            
+            // Add animation to show map is updating
+            addressMapFrame.style.opacity = '0.5';
+            setTimeout(() => {
+                addressMapFrame.style.opacity = '1';
+                // Auto-fill address after map loads
+                setTimeout(() => {
+                    fillAddressFromMap();
+                }, 1000);
+            }, 300);
+        }
+
+        // Function to get mock address data based on location
+        function getMockAddressData(location) {
+            const mockAddresses = {
+                'Bangalore, India': {
+                    address1: '123 MG Road',
+                    address2: ' Brigade Road Area',
+                    city: 'Bangalore',
+                    state: 'Karnataka',
+                    pin: '560001',
+                    landmark: 'Near Brigade Metro Station'
+                },
+                'Bengaluru, India': {
+                    address1: '456 Residency Road',
+                    address2: ' Richmond Town',
+                    city: 'Bengaluru',
+                    state: 'Karnataka',
+                    pin: '560025',
+                    landmark: 'Near St. Marks Road'
+                },
+                'Delhi, India': {
+                    address1: '789 Connaught Place',
+                    address2: ' Inner Circle',
+                    city: 'New Delhi',
+                    state: 'Delhi',
+                    pin: '110001',
+                    landmark: 'Near Palika Bazar'
+                },
+                'New Delhi, India': {
+                    address1: '321 Janpath',
+                    address2: ' Connaught Place',
+                    city: 'New Delhi',
+                    state: 'Delhi',
+                    pin: '110001',
+                    landmark: 'Near Janpath Market'
+                },
+                'Mumbai, India': {
+                    address1: '123 Marine Drive',
+                    address2: ' Queens Necklace',
+                    city: 'Mumbai',
+                    state: 'Maharashtra',
+                    pin: '400020',
+                    landmark: 'Near Girgaon Chowpatty'
+                },
+                'Hyderabad, India': {
+                    address1: '456 Banjara Hills',
+                    address2: ' Road No. 12',
+                    city: 'Hyderabad',
+                    state: 'Telangana',
+                    pin: '500034',
+                    landmark: 'Near GVK One Mall'
+                },
+                'Chennai, India': {
+                    address1: '789 Anna Salai',
+                    address2: ' T Nagar',
+                    city: 'Chennai',
+                    state: 'Tamil Nadu',
+                    pin: '600017',
+                    landmark: 'Near T Nagar Bus Stand'
+                },
+                'Kolkata, India': {
+                    address1: '123 Park Street',
+                    address2: ' Camac Street',
+                    city: 'Kolkata',
+                    state: 'West Bengal',
+                    pin: '700016',
+                    landmark: 'Near Park Street Metro'
+                },
+                'Pune, India': {
+                    address1: '456 FC Road',
+                    address2: ' Shivaji Nagar',
+                    city: 'Pune',
+                    state: 'Maharashtra',
+                    pin: '411005',
+                    landmark: 'Near SGS Mall'
+                }
+            };
+            
+            // Check for exact match first
+            if (mockAddresses[location]) {
+                return mockAddresses[location];
+            }
+            
+            // Check for partial matches
+            for (const [key, address] of Object.entries(mockAddresses)) {
+                if (location.toLowerCase().includes(key.toLowerCase()) || 
+                    key.toLowerCase().includes(location.toLowerCase())) {
+                    return address;
+                }
+            }
+            
+            // Handle geolocation coordinates (lat,lon format)
+            if (location.includes(',') && location.match(/^\d+\.\d+,\d+\.\d+$/)) {
+                const [lat, lon] = location.split(',').map(parseFloat);
+                
+                // Approximate city detection based on coordinates
+                if (lat >= 12.8 && lat <= 13.2 && lon >= 77.4 && lon <= 77.8) {
+                    // Bangalore area
+                    return mockAddresses['Bangalore, India'];
+                } else if (lat >= 28.4 && lat <= 28.8 && lon >= 76.8 && lon <= 77.4) {
+                    // Delhi area
+                    return mockAddresses['Delhi, India'];
+                } else if (lat >= 19.0 && lat <= 19.3 && lon >= 72.8 && lon <= 72.9) {
+                    // Mumbai area
+                    return mockAddresses['Mumbai, India'];
+                } else if (lat >= 17.2 && lat <= 17.5 && lon >= 78.3 && lon <= 78.6) {
+                    // Hyderabad area
+                    return mockAddresses['Hyderabad, India'];
+                } else if (lat >= 13.0 && lat <= 13.2 && lon >= 80.1 && lon <= 80.3) {
+                    // Chennai area
+                    return mockAddresses['Chennai, India'];
+                } else if (lat >= 22.4 && lat <= 22.7 && lon >= 88.2 && lon <= 88.5) {
+                    // Kolkata area
+                    return mockAddresses['Kolkata, India'];
+                } else if (lat >= 18.4 && lat <= 18.6 && lon >= 73.8 && lon <= 73.9) {
+                    // Pune area
+                    return mockAddresses['Pune, India'];
+                }
+            }
+            
+            // Generate dynamic address based on location string
+            const cityHash = location.split('').reduce((a, b) => {
+                a = ((a << 5) - a) + b.charCodeAt(0);
+                return a & a;
+            }, 0);
+            const pin = String(500000 + (cityHash % 900000));
+            
+            return {
+                address1: `123 Main Street`,
+                address2: `Sector ${1 + (cityHash % 10)}`,
+                city: city,
+                state: state,
+                pin: pin.substring(0, 6),
+                landmark: `Near ${city} Center`
+            };
+        }
+
+        // Function to fill address fields with mock data
+        function fillAddressFromMap() {
+            console.log('fillAddressFromMap called, currentMapLocation:', currentMapLocation); // Debug
+            if (!currentMapLocation) {
+                showAlert('Please select a location on the map first.', 'error');
+                return;
+            }
+            
+            const addressData = getMockAddressData(currentMapLocation);
+            console.log('Address data returned:', addressData); // Debug
+            
+            // Check if order modal is open, if not, open it first
+            const orderModal = document.getElementById('orderModal');
+            if (orderModal && !orderModal.classList.contains('show')) {
+                console.log('Order modal not open, opening it first'); // Debug
+                openOrderModal();
+                // Wait a bit for modal to fully open before filling fields
+                setTimeout(() => {
+                    fillAddressFields(addressData);
+                }, 500);
+                return;
+            }
+            
+            fillAddressFields(addressData);
+        }
+        
+        function fillAddressFields(addressData) {
+            console.log('Filling address fields with data:', addressData); // Debug
+            
+            // Fill all address fields with validation
+            const orderAddress = document.getElementById('orderAddress');
+            const orderAddress2 = document.getElementById('orderAddress2');
+            const orderCity = document.getElementById('orderCity');
+            const orderState = document.getElementById('orderState');
+            const orderPin = document.getElementById('orderPin');
+            const orderLandmark = document.getElementById('orderLandmark');
+            
+            console.log('Address elements found:', {
+                orderAddress: !!orderAddress,
+                orderAddress2: !!orderAddress2,
+                orderCity: !!orderCity,
+                orderState: !!orderState,
+                orderPin: !!orderPin,
+                orderLandmark: !!orderLandmark
+            }); // Debug
+            
+            if (orderAddress) {
+                console.log('Setting orderAddress to:', addressData.address1); // Debug
+                orderAddress.value = addressData.address1 || '';
+                orderAddress.style.backgroundColor = '#e8f5e8';
+                setTimeout(() => { orderAddress.style.backgroundColor = ''; }, 2000);
+            }
+            
+            if (orderAddress2) {
+                orderAddress2.value = addressData.address2 || '';
+                if (addressData.address2) {
+                    orderAddress2.style.backgroundColor = '#e8f5e8';
+                    setTimeout(() => { orderAddress2.style.backgroundColor = ''; }, 2000);
+                }
+            }
+            
+            if (orderCity) {
+                orderCity.value = addressData.city || '';
+                orderCity.style.backgroundColor = '#e8f5e8';
+                setTimeout(() => { orderCity.style.backgroundColor = ''; }, 2000);
+            }
+            
+            if (orderState) {
+                orderState.value = addressData.state || '';
+                orderState.style.backgroundColor = '#e8f5e8';
+                setTimeout(() => { orderState.style.backgroundColor = ''; }, 2000);
+            }
+            
+            if (orderPin) {
+                orderPin.value = addressData.pin || '';
+                orderPin.style.backgroundColor = '#e8f5e8';
+                setTimeout(() => { orderPin.style.backgroundColor = ''; }, 2000);
+            }
+            
+            if (orderLandmark) {
+                orderLandmark.value = addressData.landmark || '';
+                if (addressData.landmark) {
+                    orderLandmark.style.backgroundColor = '#e8f5e8';
+                    setTimeout(() => { orderLandmark.style.backgroundColor = ''; }, 2000);
+                }
+            }
+            
+            // Show success message with location details
+            showAlert(`Address filled successfully for: ${currentMapLocation}`, 'success');
+            
+            // Scroll to address fields to show filled data
+            orderAddress?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Search map button
+        searchMapBtn?.addEventListener('click', function() {
+            const query = mapSearchInput?.value?.trim();
+            if (!query) {
+                showAlert('Please enter a location to search.', 'error');
+                return;
+            }
+            showAlert(`Searching for: ${query}...`, 'info');
+            updateMapLocation(query);
+        });
+
+        // Enter key support for search
+        mapSearchInput?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchMapBtn?.click();
+            }
+        });
+
+        // Use my location button (geolocation)
+        useMyLocationBtn?.addEventListener('click', function() {
+            if (!navigator.geolocation) {
+                showAlert('Geolocation is not supported by your browser.', 'error');
+                return;
+            }
+
+            useMyLocationBtn.disabled = true;
+            useMyLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Getting Location...';
+            showAlert('Getting your current location...', 'info');
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const locationString = `${lat},${lon}`;
+                    
+                    // Update map location
+                    updateMapLocation(locationString);
+                    
+                    // Auto-fill address fields immediately
+                    setTimeout(() => {
+                        fillAddressFromMap();
+                    }, 1500);
+                    
+                    useMyLocationBtn.disabled = false;
+                    useMyLocationBtn.innerHTML = '<i class="fas fa-location-crosshairs me-1"></i> My Location';
+                    
+                    showAlert('Location found! Address filled automatically.', 'success');
+                },
+                function(error) {
+                    useMyLocationBtn.disabled = false;
+                    useMyLocationBtn.innerHTML = '<i class="fas fa-location-crosshairs me-1"></i> My Location';
+                    
+                    let errorMessage = 'Unable to get your location.';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage = 'Location access denied. Please allow location access and try again.';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage = 'Location information unavailable. Please try searching manually.';
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage = 'Location request timed out. Please try again.';
+                            break;
+                    }
+                    showAlert(errorMessage, 'error');
+                }
+            );
+        });
+
+        // Fill address button
+        fillAddressBtn?.addEventListener('click', function() {
+            fillAddressFromMap();
+        });
+
+        // Reset map button
+        resetMapBtn?.addEventListener('click', function() {
+            mapSearchInput.value = '';
+            updateMapLocation('Bangalore, India');
+            showAlert('Map reset to default location.', 'info');
+        });
+
+        applyCouponBtn?.addEventListener('click', function(){
+            const code = (document.getElementById('orderCoupon')?.value || '').trim().toUpperCase();
+            if(!code){
+                couponStatus.textContent = 'Enter a coupon code to apply.';
+                return;
+            }
+            if(code === 'SAVE10'){
+                couponStatus.textContent = 'Coupon applied: 10% off (demo)';
+            } else {
+                couponStatus.textContent = 'Invalid coupon code.';
+            }
+        });
+
+        function loadSavedAddress(){
+            if(!currentUser) return;
+            const key = `midcare_saved_address_${currentUser.id}`;
+            const saved = JSON.parse(localStorage.getItem(key) || 'null');
+            if(!saved) return;
+            document.getElementById('orderAddress').value = saved.address1 || '';
+            document.getElementById('orderAddress2').value = saved.address2 || '';
+            document.getElementById('orderLandmark').value = saved.landmark || '';
+            document.getElementById('orderCity').value = saved.city || '';
+            document.getElementById('orderState').value = saved.state || '';
+            document.getElementById('orderPin').value = saved.pin || '';
+        }
+
+        function saveAddressIfRequested(){
+            if(!currentUser) return;
+            const shouldSave = document.getElementById('saveAddress')?.checked;
+            if(!shouldSave) return;
+            const key = `midcare_saved_address_${currentUser.id}`;
+            const address = {
+                address1: document.getElementById('orderAddress').value,
+                address2: document.getElementById('orderAddress2')?.value || '',
+                landmark: document.getElementById('orderLandmark')?.value || '',
+                city: document.getElementById('orderCity').value,
+                state: document.getElementById('orderState').value,
+                pin: document.getElementById('orderPin').value,
+            };
+            localStorage.setItem(key, JSON.stringify(address));
+        }
+
+        // Patch openOrderModal to load saved address + reset payment sections
+        const _openOrderModal = openOrderModal;
+        openOrderModal = function(){
+            _openOrderModal();
+            loadSavedAddress();
+            updatePaymentSections();
+            if(couponStatus) couponStatus.textContent = '';
+        }
+
+        async function ensureCsrf() {
+            if (csrfToken) return csrfToken;
+            const res = await fetch('/api/csrf/', { credentials: 'same-origin' });
+            const data = await res.json().catch(() => ({}));
+            csrfToken = data.csrfToken || '';
+            return csrfToken;
+        }
+
+        // Check login status on page load
+        async function checkLoginStatus() {
+            try {
+                const res = await fetch('/api/me/', { credentials: 'same-origin' });
+                const data = await res.json().catch(() => ({}));
+                if (data && data.authenticated && data.user) {
+                    currentUser = {
+                        id: data.user.id,
+                        firstName: data.user.first_name || '',
+                        lastName: data.user.last_name || '',
+                        email: data.user.email || ''
+                    };
+                    userCart = JSON.parse(localStorage.getItem(`midcare_cart_${currentUser.id}`)) || [];
+                    userProfile = JSON.parse(localStorage.getItem(`midcare_profile_${currentUser.id}`)) || createDefaultProfile(currentUser);
+                } else {
+                    currentUser = null;
+                    userCart = [];
+                    userProfile = null;
+                }
+                updateUI();
+            } catch (err) {
+                currentUser = null;
+                userCart = [];
+                userProfile = null;
+                updateUI();
+            }
+        }
+
+        // Create default user profile
+        function createDefaultProfile(user) {
+            return {
+                userId: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                dob: '01/01/1990',
+                gender: 'Prefer not to say',
+                phone: '',
+                bloodGroup: '',
+                allergies: 'No known allergies',
+                medications: 'None'
+            };
+        }
+
+        // Toggle chatbot visibility
+        function toggleChatbot() {
+            if (chatbotWindow.style.display === 'flex') {
+                chatbotWindow.style.display = 'none';
+            } else {
+                chatbotWindow.style.display = 'flex';
+            }
+        }
+
+        // Send chat message
+        async function sendChatMessage() {
+            const message = chatbotInput.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = message;
+            chatbotMessages.appendChild(userMessage);
+            
+            // Clear input
+            chatbotInput.value = '';
+            
+            // Scroll to bottom
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            // Add typing indicator
+            const typingMessage = document.createElement('div');
+            typingMessage.className = 'message bot-message';
+            typingMessage.textContent = 'Typing…';
+            typingMessage.id = 'typing-indicator';
+            chatbotMessages.appendChild(typingMessage);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            // Call Django backend
+            console.log('[DEBUG] Sending message to /api/chatbot/:', message);
+            try {
+                const response = await fetch('/api/chatbot/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+
+                const contentType = (response.headers.get('content-type') || '').toLowerCase();
+                const isJson = contentType.includes('application/json');
+                const payload = isJson ? await response.json().catch(() => ({})) : null;
+                if(!response.ok){
+                    let msg = `Server error ${response.status}`;
+                    if(payload && (payload.error || payload.reply)) msg = payload.error || payload.reply;
+                    if(!payload){
+                        const text = await response.text().catch(() => '');
+                        if(text) msg = `Server error ${response.status}`;
+                    }
+                    throw new Error(msg);
+                }
+
+                const botResponse = payload?.reply || 'Sorry, I could not generate a response.';
+
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot-message';
+                botMessage.textContent = botResponse;
+                chatbotMessages.appendChild(botMessage);
+                
+                // Scroll to bottom
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            } catch (error) {
+                // Remove typing indicator
+                const typing = document.getElementById('typing-indicator');
+                if (typing) typing.remove();
+                
+                console.error('Chatbot error:', error);
+                console.error('Error details:', error.message, error.stack);
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'message bot-message';
+                errorMessage.textContent = 'Error: ' + (error.message || 'Unknown error. Please try again.');
+                chatbotMessages.appendChild(errorMessage);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+        }
+
+        // Get bot response based on user message
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('appointment') || lowerMessage.includes('book')) {
+                return "To book an appointment, please go to the Doctors section, select a specialist, and click the 'Book Now' button. You'll need to be logged in to book an appointment.";
+            } else if (lowerMessage.includes('medicine') || lowerMessage.includes('pharmacy')) {
+                return "You can browse and purchase medicines in our Pharmacy section. We offer both prescription and over-the-counter medications with guaranteed authenticity.";
+            } else if (lowerMessage.includes('login') || lowerMessage.includes('sign up')) {
+                return "You can create an account by clicking the 'Sign Up' button in the top right corner. If you already have an account, click 'Login'.";
+            } else if (lowerMessage.includes('emergency') || lowerMessage.includes('urgent')) {
+                return "If this is a medical emergency, please call your local emergency services immediately. For non-emergency medical questions, you can book an appointment with one of our doctors.";
+            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                return "Hello! How can I assist you with your healthcare needs today?";
+            } else if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                return "Our medicine prices are competitive and transparent. You can view prices for each medicine in the Pharmacy section. Doctor consultation fees vary by specialist.";
+            } else if (lowerMessage.includes('delivery') || lowerMessage.includes('shipping')) {
+                return "We offer fast and reliable medicine delivery across India. Standard delivery is 2-3 business days. Express delivery options are also available.";
+            } else {
+                return "I'm here to help with your healthcare needs. You can ask me about booking appointments, our pharmacy services, or creating an account. How can I assist you?";
+            }
+        }
+
+        // Show alert message
+        function showAlert(message, type) {
+            // Create alert element
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type === 'error' ? 'danger' : 'success'} alert-dismissible fade show`;
+            alert.style.position = 'fixed';
+            alert.style.top = '20px';
+            alert.style.right = '20px';
+            alert.style.zIndex = '9999';
+            alert.style.minWidth = '300px';
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alert);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.parentNode.removeChild(alert);
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

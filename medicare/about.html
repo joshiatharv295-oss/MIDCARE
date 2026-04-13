@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About - Medicare</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Medicare</a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="medicines.html" class="nav-link">Medicines</a>
+        <a href="appointments.html" class="nav-link">Appointments</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link btn btn-primary">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container" style="padding:32px 0">
+    <h1>About Us</h1>
+    <p>We provide comprehensive healthcare services with a patient-first approach.</p>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© <span id="year"></span> Medicare</p></div></footer>
+  <button id="chatbot-fab" aria-label="Open chat">💬</button>
+  <div id="chatbot" aria-live="polite" aria-hidden="true">
+    <div class="chat-header">
+      <img src="assets/chatbot-logo.svg" alt="Chatbot logo" class="chat-logo">
+      <span>Medicare Assistant</span>
+      <button id="chatbot-close" class="chat-close" aria-label="Close chat">✕</button>
+    </div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <form id="chat-form" class="chat-input" autocomplete="off">
+      <input id="chat-text" type="text" placeholder="Type your message..." aria-label="Message">
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+  </div>
+  <script src="chatbot.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

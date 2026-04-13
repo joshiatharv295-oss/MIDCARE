@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container" style="padding:32px 0">
+  <h1>Our Services</h1>
+  <ul>
+    <li>General Consultation</li>
+    <li>Pediatrics</li>
+    <li>Cardiology</li>
+    <li>Diagnostics</li>
+  </ul>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Your existing JavaScript code here
+  document.getElementById('year').textContent = new Date().getFullYear();
+});
+</script>
+{% endblock %}

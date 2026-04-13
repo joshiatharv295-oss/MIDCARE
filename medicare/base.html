@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MidCare - Your Trusted Healthcare Partner</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2a7de1;
+            --secondary-color: #00b894;
+            --accent-color: #fd79a8;
+            --dark-color: #2d3436;
+            --light-color: #f8f9fa;
+            --gradient-primary: linear-gradient(135deg, #2a7de1, #00b894);
+            --gradient-secondary: linear-gradient(135deg, #fd79a8, #e17055);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .navbar {
+            background: var(--gradient-primary);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            color: white;
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(42, 125, 225, 0.85), rgba(0, 184, 148, 0.85)), url('https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .section-title {
+            color: var(--dark-color);
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .doctor-card .card-img-top {
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .doctor-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .medicine-card .card-img-top {
+            height: 200px;
+            object-fit: contain;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(42, 125, 225, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(253, 121, 168, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .profile-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .chatbot-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .chatbot-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 5px 20px rgba(42, 125, 225, 0.4);
+            font-size: 1.8rem;
+            transition: all 0.3s;
+            animation: floatY 3s ease-in-out infinite;
+        }
+        
+        .chatbot-button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); box-shadow: 0 5px 20px rgba(42,125,225,0.35); }
+            50% { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(42,125,225,0.45); }
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 85px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chatbot-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-logo { width: 28px; height: 28px; border-radius: 6px; }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 18px;
+            border-radius: 20px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .bot-message {
+            background: white;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .user-message {
+            background: var(--primary-color);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 2px 5px rgba(42, 125, 225, 0.2);
+        }
+        
+        .chatbot-input {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            background: white;
+        }
+        
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-links h5 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h5:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #b2b2b2;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+            color: #b2b2b2;
+        }
+        
+        .login-modal, .signup-modal, .appointment-modal {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 25px;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .disease-category {
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        
+        .disease-category:hover {
+            background: rgba(42, 125, 225, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .active-category {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .price-tag {
+            font-weight: 700;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+        
+        .badge-custom {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+        
+        .rating {
+            color: #ffc107;
+        }
+        
+        .search-box {
+            border-radius: 50px;
+            padding: 15px 25px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .search-box:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(42, 125, 225, 0.25);
+        }
+        
+        .page-section {
+            padding: 80px 0;
+        }
+        
+        .page-hero {
+            background: linear-gradient(rgba(42, 125, 225, 0.9), rgba(0, 184, 148, 0.9)), url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .page-content {
+            padding: 60px 0;
+        }
+
+        /* Section backgrounds with medical imagery */
+        #doctors {
+            background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center; color: #fff; border-radius: 16px; padding: 32px 24px; margin-bottom: 50px;
+        }
+        #pharmacy {
+            background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1580281780460-82d277b0ec69?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center; color: #fff; border-radius: 16px; padding: 32px 24px; margin-bottom: 50px;
+        }
+        #appointments {
+            background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center; color: #fff; border-radius: 16px; padding: 32px 24px; margin-bottom: 50px;
+        }
+        #about {
+            background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1580281780460-82d277b0ec69?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center; color: #fff; border-radius: 16px; padding: 32px 24px; margin-bottom: 50px;
+        }
+        #contact {
+            background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1581582420565-5f32f4b3f1b7?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center; color: #fff; border-radius: 16px; padding: 32px 24px; margin-bottom: 50px;
+        }
+        
+        .doctor-detail-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .doctor-detail-img {
+            height: 400px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .availability-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 500;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .available {
+            background: rgba(0, 184, 148, 0.15);
+            color: var(--secondary-color);
+        }
+        
+        .unavailable {
+            background: rgba(253, 121, 168, 0.15);
+            color: var(--accent-color);
+        }
+        
+        .medicine-category-filter {
+            margin-bottom: 30px;
+        }
+        
+        .category-filter-btn {
+            border: 2px solid #e0e0e0;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .category-filter-btn:hover, .category-filter-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .cart-summary-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 20px;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            
+            .chatbot-window {
+                width: 300px;
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-heartbeat"></i> MidCare
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#doctors">Doctors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pharmacy">Pharmacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#appointments">Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2" id="loginBtn"><i class="fas fa-sign-in-alt me-1"></i> Login</button>
+                    <button class="btn btn-light" id="signupBtn"><i class="fas fa-user-plus me-1"></i> Sign Up</button>
+                    <div id="userSection" class="hidden">
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                                <i class="fas fa-user me-1"></i> <span id="userName">User</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#profile"><i class="fas fa-user-circle me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="#cart"><i class="fas fa-shopping-cart me-2"></i>Cart <span id="cartCount" class="badge bg-primary">0</span></a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page Content -->
+    <div id="homePage">
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="container">
+                <h1 class="display-4 fw-bold mb-4">Your Health, Our Priority</h1>
+                <p class="lead mb-5">India's most trusted platform for doctor appointments and medicine delivery. Connect with top specialists and get genuine medicines delivered to your doorstep.</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="input-group input-group-lg">
+                            <input type="text" class="form-control search-box" placeholder="Search for doctors, medicines, or symptoms...">
+                            <button class="btn btn-primary" type="button"><i class="fas fa-search me-1"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="home-features" class="container mb-5">
+            <div class="row text-center">
+                <div class="col-md-4 mb-5">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Expert Doctors</h3>
+                    <p>Consult with certified specialists across various medical fields with years of experience</p>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="feature-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3>Online Pharmacy</h3>
+                    <p>Order prescribed medicines and get them delivered to your home with guaranteed authenticity</p>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Easy Appointments</h3>
+                    <p>Book appointments with doctors based on your health condition at your convenience</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doctors by Disease Section -->
+        <section id="doctors" class="container mb-5">
+            <h2 class="section-title">Find Doctors by Specialty</h2>
+            
+            <div class="row">
+                <!-- Disease Categories -->
+                <div class="col-md-3">
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action disease-category active-category" data-disease="all">All Specialties</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="cardiology">Cardiology</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="dermatology">Dermatology</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="neurology">Neurology</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="orthopedics">Orthopedics</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="pediatrics">Pediatrics</a>
+                        <a class="list-group-item list-group-item-action disease-category" data-disease="gastroenterology">Gastroenterology</a>
+                    </div>
+                </div>
+                
+                <!-- Doctors List -->
+                <div class="col-md-9">
+                    <div class="row" id="doctorsList">
+                        <!-- Doctors will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pharmacy Section -->
+        <section id="pharmacy" class="container mb-5">
+            <h2 class="section-title">Featured Medicines</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control search-box" placeholder="Search for medicines...">
+                        <button class="btn btn-primary" type="button"><i class="fas fa-search me-1"></i></button>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="btn-group medicine-category-filter">
+                        <button class="btn category-filter-btn active">All</button>
+                        <button class="btn category-filter-btn">Prescription</button>
+                        <button class="btn category-filter-btn">OTC</button>
+                        <button class="btn category-filter-btn">Wellness</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" id="medicinesList">
+                <!-- Medicines will be dynamically loaded here -->
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#pharmacy" class="btn btn-primary">View All Medicines <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+        </section>
+
+        <!-- Health Tips Section -->
+        <section id="home-tips" class="container mb-5">
+            <h2 class="section-title">Health Tips & Articles</h2>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Health Tip">
+                        <div class="card-body">
+                            <h5 class="card-title">5 Ways to Boost Your Immunity</h5>
+                            <p class="card-text">Simple lifestyle changes that can help strengthen your immune system naturally.</p>
+                            <a href="#" class="btn btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Health Tip">
+                        <div class="card-body">
+                            <h5 class="card-title">Managing Stress in Daily Life</h5>
+                            <p class="card-text">Effective techniques to reduce stress and improve mental wellbeing.</p>
+                            <a href="#" class="btn btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Health Tip">
+                        <div class="card-body">
+                            <h5 class="card-title">Nutrition for a Healthy Heart</h5>
+                            <p class="card-text">Foods that promote cardiovascular health and reduce heart disease risk.</p>
+                            <a href="#" class="btn btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Appointments Section -->
+        <section id="appointments" class="container mb-5">
+            <h2 class="section-title">Book Appointments with Our Doctors</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Book appointments with our experienced doctors across various specialties.</p>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</button>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Appointment" class="img-fluid">
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="container mb-5">
+            <h2 class="section-title">About Us</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p>We are a team of healthcare professionals dedicated to providing the best medical services to our patients.</p>
+                    <p>Our mission is to make healthcare accessible and affordable for everyone.</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="About Us" class="img-fluid">
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="container mb-5">
+            <h2 class="section-title">Get in Touch with Us</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Have any questions or concerns? Feel free to reach out to us.</p>
+                    <p>Contact Us: <a href="mailto:info@midcare.com">info@midcare.com</a></p>
+                    <p>Phone: +91 98765 43210</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Contact Us" class="img-fluid">
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="container mb-5">
+            <h2 class="section-title">Your Profile</h2>
+            <div class="profile-section">
+                <p class="mb-2"><strong>Name:</strong> <span id="profileName">Guest</span></p>
+                <p class="mb-2"><strong>Email:</strong> <span id="profileEmail">-</span></p>
+                <p class="mb-2"><strong>Blood Group:</strong> <span id="profileBlood">-</span></p>
+                <p class="mb-0 text-muted">Login to view and edit your profile details.</p>
+            </div>
+        </section>
+
+        <!-- Cart Section -->
+        <section id="cart" class="container mb-5">
+            <h2 class="section-title">Your Cart</h2>
+            <div class="cart-summary-card">
+                <div id="cartItems"></div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <strong>Total:</strong>
+                    <span id="cartTotal">₹0</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Doctor Detail Modal -->
+    <div class="modal fade" id="doctorDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background: var(--gradient-primary); color: #fff;">
+                    <h5 class="modal-title" id="doctorDetailName">Doctor Profile</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <div class="col-md-5">
+                            <img id="doctorDetailImg" class="img-fluid rounded" alt="Doctor">
+                        </div>
+                        <div class="col-md-7">
+                            <p class="mb-2"><strong>Specialty:</strong> <span id="doctorDetailSpecialty"></span></p>
+                            <p class="mb-2"><strong>Hospital:</strong> <span id="doctorDetailHospital"></span></p>
+                            <p class="mb-2"><strong>Experience:</strong> <span id="doctorDetailExperience"></span></p>
+                            <p class="mb-3"><strong>Rating:</strong> <span id="doctorDetailRating"></span> ⭐</p>
+                            <p class="mb-3"><strong>Availability:</strong> <span id="doctorDetailAvailability"></span></p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5><i class="fas fa-heartbeat me-2"></i>MidCare</h5>
+                    <p>Your trusted partner in healthcare. We connect you with the best medical professionals and provide easy access to genuine medicines.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 footer-links">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#doctors">Doctors</a></li>
+                        <li><a href="#pharmacy">Pharmacy</a></li>
+                        <li><a href="#appointments">Appointments</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 footer-links">
+                    <h5>Medical Services</h5>
+                    <ul>
+                        <li><a href="#">Cardiology</a></li>
+                        <li><a href="#">Dermatology</a></li>
+                        <li><a href="#">Neurology</a></li>
+                        <li><a href="#">Orthopedics</a></li>
+                        <li><a href="#">Pediatrics</a></li>
+                        <li><a href="#">Gastroenterology</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 footer-links">
+                    <h5>Contact Us</h5>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Healthcare Ave, Mumbai, India</li>
+                        <li><i class="fas fa-phone me-2"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@midcare.com</li>
+                        <li><i class="fas fa-clock me-2"></i> Mon-Sun: 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 MidCare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-button" id="chatbotToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <img src="assets/chatbot-logo.svg" alt="Chatbot logo" class="chat-logo">
+                <div class="flex-grow-1">
+                    <h6 class="mb-0">MidCare Assistant</h6>
+                    <small>How can I help you today?</small>
+                </div>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Hello! I'm your MidCare assistant. How can I help you with your healthcare needs today?
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="chatbotInput" placeholder="Type your message...">
+                    <button class="btn btn-primary" id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content login-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to Your Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content signup-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Your Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signupForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="signupFirstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="signupFirstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="signupLastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="signupLastName" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="signupEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signupPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="signupConfirmPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">I agree to the <a href="#">Terms and Conditions</a></label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Create Account</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointment Modal -->
+    <div class="modal fade" id="appointmentModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content appointment-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="appointmentDoctorName">Book Appointment</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="appointmentForm">
+                        <div class="mb-3">
+                            <label for="appointmentDate" class="form-label">Preferred Date</label>
+                            <input type="date" class="form-control" id="appointmentDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appointmentTime" class="form-label">Preferred Time</label>
+                            <select class="form-select" id="appointmentTime" required>
+                                <option value="">Select a time</option>
+                                <option value="09:00">09:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="14:00">02:00 PM</option>
+                                <option value="15:00">03:00 PM</option>
+                                <option value="16:00">04:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appointmentReason" class="form-label">Reason for Visit</label>
+                            <textarea class="form-control" id="appointmentReason" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Book Appointment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        // Sample data for doctors and medicines with Indian context
+        const doctors = [
+            {
+                id: 1,
+                name: "Dr. Priya Sharma",
+                specialty: "Cardiology",
+                experience: "15 years",
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                availability: "Mon, Wed, Fri",
+                hospital: "Apollo Hospital, Delhi"
+            },
+            {
+                id: 2,
+                name: "Dr. Rajesh Kumar",
+                specialty: "Dermatology",
+                experience: "12 years",
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                availability: "Tue, Thu, Sat",
+                hospital: "Fortis Hospital, Mumbai"
+            },
+            {
+                id: 3,
+                name: "Dr. Anjali Mehta",
+                specialty: "Neurology",
+                experience: "18 years",
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1594824947933-d0501ba2fe65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                availability: "Mon, Tue, Thu",
+                hospital: "AIIMS, Delhi"
+            },
+            {
+                id: 4,
+                name: "Dr. Vikram Singh",
+                specialty: "Orthopedics",
+                experience: "14 years",
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                availability: "Wed, Fri, Sat",
+                hospital: "Max Hospital, Delhi"
+            },
+            {
+                id: 5,
+                name: "Dr. Sneha Patel",
+                specialty: "Pediatrics",
+                experience: "10 years",
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                availability: "Mon, Wed, Fri",
+                hospital: "Rainbow Children's Hospital, Bangalore"
+            },
+            {
+                id: 6,
+                name: "Dr. Arjun Reddy",
+                specialty: "Gastroenterology",
+                experience: "16 years",
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                availability: "Tue, Thu, Sat",
+                hospital: "Global Hospital, Chennai"
+            }
+        ];
+
+        const medicines = [
+            {
+                id: 1,
+                name: "Paracetamol",
+                type: "OTC",
+                price: 25,
+                image: "https://www.google.com/imgres?q=cipla&imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FSELLER%2FDefault%2F2021%2F4%2FAF%2FQZ%2FLU%2F8070144%2Fcipla-medicine-500x500.png&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fcipla-medicine-23386775212.html%3Fsrsltid%3DAfmBOopTE5mgheTPfreKhnMy9pzQI-8EJRIB750MWn5SwnN_EkZKTmY9&docid=9TgJg1eYLP2G3M&tbnid=7hly95Y9iqKBcM&vet=12ahUKEwiEosiZkomTAxUhs1YBHQGNLVgQnPAOegQIGBAB..i&w=500&h=423&hcb=2&ved=2ahUKEwiEosiZkomTAxUhs1YBHQGNLVgQnPAOegQIGBAB",
+                description: "Pain reliever and fever reducer",
+                manufacturer: "Cipla"
+            },
+            {
+                id: 2,
+                name: "Amoxicillin",
+                type: "Prescription",
+                price: 120,
+                image: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                description: "Antibiotic used to treat bacterial infections",
+                manufacturer: "Sun Pharma"
+            },
+            {
+                id: 3,
+                name: "Atorvastatin",
+                type: "Prescription",
+                price: 85,
+                image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                description: "Cholesterol-lowering medication",
+                manufacturer: "Dr. Reddy's"
+            },
+            {
+                id: 4,
+                name: "Vitamin D3",
+                type: "Wellness",
+                price: 180,
+                image: "https://images.unsplash.com/photo-1599045118108-bf9954418b76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                description: "Supplement for bone health and immune support",
+                manufacturer: "Himalaya Wellness"
+            },
+            {
+                id: 5,
+                name: "Metformin",
+                type: "Prescription",
+                price: 65,
+                image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                description: "Medication for type 2 diabetes",
+                manufacturer: "Lupin"
+            },
+            {
+                id: 6,
+                name: "Ibuprofen",
+                type: "OTC",
+                price: 40,
+                image: "https://images.unsplash.com/photo-1599045118108-bf9954418b76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                description: "Anti-inflammatory pain reliever",
+                manufacturer: "Mankind Pharma"
+            }
+        ];
+
+        // User state
+        let currentUser = null;
+        let userCart = [];
+        let userProfile = null;
+
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const userSection = document.getElementById('userSection');
+        const userName = document.getElementById('userName');
+        const cartCount = document.getElementById('cartCount');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        const signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+        const appointmentModal = new bootstrap.Modal(document.getElementById('appointmentModal'));
+        const showSignup = document.getElementById('showSignup');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const appointmentForm = document.getElementById('appointmentForm');
+        const doctorsList = document.getElementById('doctorsList');
+        const medicinesList = document.getElementById('medicinesList');
+        const diseaseCategories = document.querySelectorAll('.disease-category');
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDoctors('all');
+            loadMedicines();
+            checkLoginStatus();
+            setupRouter();
+            
+            // Event listeners
+            loginBtn.addEventListener('click', () => loginModal.show());
+            signupBtn.addEventListener('click', () => signupModal.show());
+            showSignup.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.hide();
+                signupModal.show();
+            });
+
+        // Simple hash-based router to show sections like separate pages
+        function setupRouter(){
+            const pages = ['home','doctors','pharmacy','appointments','about','contact','profile','cart'];
+            function setActive(href){
+                document.querySelectorAll('.nav-link').forEach(a=>{
+                    a.classList.toggle('active', a.getAttribute('href') === '#' + href);
+                });
+            }
+            function showPage(page){
+                // Hide all target sections
+                pages.forEach(id=>{
+                    const el = document.getElementById(id);
+                    if(el) el.classList.add('hidden');
+                });
+                // Also hide home group parts
+                document.getElementById('home-features')?.classList.add('hidden');
+                document.getElementById('home-tips')?.classList.add('hidden');
+
+                if(page === 'home'){
+                    document.getElementById('home')?.classList.remove('hidden');
+                    document.getElementById('home-features')?.classList.remove('hidden');
+                    document.getElementById('home-tips')?.classList.remove('hidden');
+                } else {
+                    // Always keep hero hidden when not on home
+                    document.getElementById('home')?.classList.add('hidden');
+                    const target = document.getElementById(page);
+                    if(target){ target.classList.remove('hidden'); }
+                }
+                setActive(page);
+                window.scrollTo({top:0, behavior:'smooth'});
+            }
+            function current(){
+                const hash = (location.hash || '#home').slice(1);
+                return hash;
+            }
+            window.addEventListener('hashchange', ()=> showPage(current()));
+            // Initial
+            if(!location.hash) location.hash = '#home';
+            showPage(current());
+        }
+            showLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                signupModal.hide();
+                loginModal.show();
+            });
+            logoutBtn.addEventListener('click', handleLogout);
+            loginForm.addEventListener('submit', handleLogin);
+            signupForm.addEventListener('submit', handleSignup);
+            appointmentForm.addEventListener('submit', handleAppointment);
+            
+            // Disease category filtering
+            diseaseCategories.forEach(category => {
+                category.addEventListener('click', function() {
+                    diseaseCategories.forEach(c => c.classList.remove('active-category'));
+                    this.classList.add('active-category');
+                    loadDoctors(this.dataset.disease);
+                });
+            });
+            
+            // Chatbot functionality
+            chatbotToggle.addEventListener('click', toggleChatbot);
+            chatbotSend.addEventListener('click', sendChatMessage);
+            chatbotInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendChatMessage();
+                }
+            });
+            
+            // Medicine category filtering
+            document.querySelectorAll('.category-filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, this would filter medicines
+                });
+            });
+        });
+
+        // Load doctors based on disease category
+        function loadDoctors(disease) {
+            doctorsList.innerHTML = '';
+            
+            const filteredDoctors = disease === 'all' 
+                ? doctors 
+                : doctors.filter(doctor => doctor.specialty.toLowerCase() === disease);
+            
+            if (filteredDoctors.length === 0) {
+                doctorsList.innerHTML = '<div class="col-12 text-center"><p>No doctors found for this specialty.</p></div>';
+                return;
+            }
+            
+            filteredDoctors.forEach(doctor => {
+                const doctorCard = document.createElement('div');
+                doctorCard.className = 'col-md-6 col-lg-4';
+                doctorCard.innerHTML = `
+                    <div class="card doctor-card">
+                        <img src="${doctor.image}" class="card-img-top" alt="${doctor.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${doctor.name}</h5>
+                            <p class="card-text text-muted">${doctor.specialty}</p>
+                            <p class="card-text small text-muted">${doctor.hospital}</p>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge-custom">${doctor.experience}</span>
+                                <span class="rating">
+                                    <i class="fas fa-star"></i> ${doctor.rating}
+                                </span>
+                            </div>
+                            <p class="card-text"><small class="text-muted">Available: ${doctor.availability}</small></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary btn-sm book-appointment" data-doctor-id="${doctor.id}" data-doctor-name="${doctor.name}">
+                                    Book Appointment
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm view-profile" data-doctor-id="${doctor.id}">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                doctorsList.appendChild(doctorCard);
+            });
+            
+            // Add event listeners to book appointment buttons
+            document.querySelectorAll('.book-appointment').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!currentUser) {
+                        loginModal.show();
+                        return;
+                    }
+                    
+                    const doctorId = this.dataset.doctorId;
+                    const doctorName = this.dataset.doctorName;
+                    document.getElementById('appointmentDoctorName').textContent = `Book Appointment with ${doctorName}`;
+                    appointmentModal.show();
+                });
+            });
+
+            // Add event listeners to view profile buttons
+            document.querySelectorAll('.view-profile').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.doctorId);
+                    const d = doctors.find(doc => doc.id === id);
+                    if(!d) return;
+                    document.getElementById('doctorDetailName').textContent = d.name;
+                    document.getElementById('doctorDetailImg').src = d.image;
+                    document.getElementById('doctorDetailSpecialty').textContent = d.specialty;
+                    document.getElementById('doctorDetailHospital').textContent = d.hospital;
+                    document.getElementById('doctorDetailExperience').textContent = d.experience;
+                    document.getElementById('doctorDetailRating').textContent = d.rating;
+                    document.getElementById('doctorDetailAvailability').textContent = d.availability;
+                    new bootstrap.Modal(document.getElementById('doctorDetailModal')).show();
+                });
+            });
+        }
+
+        // Load medicines
+        function loadMedicines() {
+            medicinesList.innerHTML = '';
+            
+            medicines.forEach(medicine => {
+                const medicineCard = document.createElement('div');
+                medicineCard.className = 'col-md-6 col-lg-4 col-xl-3';
+                medicineCard.innerHTML = `
+                    <div class="card medicine-card h-100">
+                        <img src="${medicine.image}" class="card-img-top" alt="${medicine.name}">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">${medicine.name}</h5>
+                            <p class="card-text small text-muted">${medicine.manufacturer}</p>
+                            <p class="card-text flex-grow-1">${medicine.description}</p>
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <span class="price-tag">₹${medicine.price}</span>
+                                <button class="btn btn-outline-primary btn-sm add-to-cart" data-medicine-id="${medicine.id}">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                medicinesList.appendChild(medicineCard);
+            });
+            
+            // Add event listeners to add to cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!currentUser) {
+                        loginModal.show();
+                        return;
+                    }
+                    
+                    const medicineId = parseInt(this.dataset.medicineId);
+                    addToCart(medicineId);
+                });
+            });
+        }
+
+        // Handle login
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // In a real app, this would be an API call
+            if (email && password) {
+                // For demo purposes, we'll create a user if none exists
+                if (!currentUser) {
+                    const users = JSON.parse(localStorage.getItem('midcare_users')) || [];
+                    const user = users.find(u => u.email === email && u.password === password);
+                    
+                    if (user) {
+                        currentUser = user;
+                        userCart = JSON.parse(localStorage.getItem(`midcare_cart_${user.id}`)) || [];
+                        userProfile = JSON.parse(localStorage.getItem(`midcare_profile_${user.id}`)) || createDefaultProfile(user);
+                        localStorage.setItem('midcare_logged_in_user', String(user.id));
+                        
+                        updateUI();
+                        loginModal.hide();
+                        showAlert('Login successful!', 'success');
+                    } else {
+                        showAlert('Invalid email or password', 'error');
+                    }
+                }
+            }
+        }
+
+        // Handle signup
+        function handleSignup(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('signupFirstName').value;
+            const lastName = document.getElementById('signupLastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showAlert('Passwords do not match', 'error');
+                return;
+            }
+            
+            // In a real app, this would be an API call
+            const users = JSON.parse(localStorage.getItem('midcare_users')) || [];
+            
+            // Check if user already exists
+            if (users.find(u => u.email === email)) {
+                showAlert('User with this email already exists', 'error');
+                return;
+            }
+            
+            // Create new user
+            const newUser = {
+                id: Date.now(),
+                firstName,
+                lastName,
+                email,
+                password,
+                createdAt: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('midcare_users', JSON.stringify(users));
+            
+            // Create user profile and cart
+            currentUser = newUser;
+            userCart = [];
+            userProfile = createDefaultProfile(newUser);
+            
+            localStorage.setItem(`midcare_cart_${newUser.id}`, JSON.stringify(userCart));
+            localStorage.setItem(`midcare_profile_${newUser.id}`, JSON.stringify(userProfile));
+            localStorage.setItem('midcare_logged_in_user', String(newUser.id));
+            
+            updateUI();
+            signupModal.hide();
+            showAlert('Account created successfully!', 'success');
+        }
+
+        // Handle logout
+        function handleLogout() {
+            currentUser = null;
+            userCart = [];
+            userProfile = null;
+            updateUI();
+            showAlert('Logged out successfully', 'success');
+            localStorage.removeItem('midcare_logged_in_user');
+        }
+
+        // Handle appointment booking
+        function handleAppointment(e) {
+            e.preventDefault();
+            if (!currentUser) return;
+            
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('appointmentTime').value;
+            const reason = document.getElementById('appointmentReason').value;
+            
+            // In a real app, this would be saved to the backend
+            const appointments = JSON.parse(localStorage.getItem(`midcare_appointments_${currentUser.id}`)) || [];
+            appointments.push({
+                id: Date.now(),
+                doctorName: document.getElementById('appointmentDoctorName').textContent.replace('Book Appointment with ', ''),
+                date,
+                time,
+                reason,
+                status: 'Confirmed'
+            });
+            
+            localStorage.setItem(`midcare_appointments_${currentUser.id}`, JSON.stringify(appointments));
+            
+            appointmentModal.hide();
+            showAlert('Appointment booked successfully!', 'success');
+            document.getElementById('appointmentForm').reset();
+        }
+
+        // Add item to cart
+        function addToCart(medicineId) {
+            if (!currentUser) return;
+            
+            const medicine = medicines.find(m => m.id === medicineId);
+            if (!medicine) return;
+            
+            const existingItem = userCart.find(item => item.id === medicineId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                userCart.push({
+                    id: medicine.id,
+                    name: medicine.name,
+                    price: medicine.price,
+                    image: medicine.image,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem(`midcare_cart_${currentUser.id}`, JSON.stringify(userCart));
+            updateCartUI();
+            showAlert(`${medicine.name} added to cart`, 'success');
+        }
+
+        // Update UI based on login status
+        function updateUI() {
+            if (currentUser) {
+                loginBtn.classList.add('hidden');
+                signupBtn.classList.add('hidden');
+                userSection.classList.remove('hidden');
+                userName.textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+                updateCartUI();
+                updateProfileSection();
+            } else {
+                loginBtn.classList.remove('hidden');
+                signupBtn.classList.remove('hidden');
+                userSection.classList.add('hidden');
+                updateProfileSection();
+                updateCartSection();
+            }
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            if (!currentUser) return;
+            
+            cartCount.textContent = userCart.reduce((total, item) => total + item.quantity, 0);
+            updateCartSection();
+        }
+
+        // Render profile section
+        function updateProfileSection(){
+            const nameEl = document.getElementById('profileName');
+            const emailEl = document.getElementById('profileEmail');
+            const bloodEl = document.getElementById('profileBlood');
+            if(currentUser){
+                nameEl.textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+                emailEl.textContent = currentUser.email;
+                const p = userProfile || createDefaultProfile(currentUser);
+                bloodEl.textContent = p.bloodGroup || '-';
+            } else {
+                nameEl.textContent = 'Guest';
+                emailEl.textContent = '-';
+                bloodEl.textContent = '-';
+            }
+        }
+
+        // Render cart section
+        function updateCartSection(){
+            const itemsEl = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotal');
+            if(!currentUser){
+                itemsEl.innerHTML = '<p class="text-muted mb-0">Login to view your cart.</p>';
+                totalEl.textContent = '₹0';
+                return;
+            }
+            if(!userCart.length){
+                itemsEl.innerHTML = '<p class="text-muted mb-0">Your cart is empty.</p>';
+                totalEl.textContent = '₹0';
+                return;
+            }
+            let total = 0;
+            itemsEl.innerHTML = userCart.map(it => {
+                total += (it.price * it.quantity);
+                return `<div class="d-flex justify-content-between cart-item"><span>${it.name} × ${it.quantity}</span><strong>₹${it.price * it.quantity}</strong></div>`;
+            }).join('');
+            totalEl.textContent = `₹${total}`;
+        }
+
+        // Check login status on page load
+        function checkLoginStatus() {
+            // In a real app, this would check for a valid session/token
+            const loggedInUserId = localStorage.getItem('midcare_logged_in_user');
+            if (loggedInUserId) {
+                const users = JSON.parse(localStorage.getItem('midcare_users')) || [];
+                currentUser = users.find(u => u.id === parseInt(loggedInUserId));
+                
+                if (currentUser) {
+                    userCart = JSON.parse(localStorage.getItem(`midcare_cart_${currentUser.id}`)) || [];
+                    userProfile = JSON.parse(localStorage.getItem(`midcare_profile_${currentUser.id}`)) || createDefaultProfile(currentUser);
+                    updateUI();
+                }
+            }
+        }
+
+        // Create default user profile
+        function createDefaultProfile(user) {
+            return {
+                userId: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                dob: '01/01/1990',
+                gender: 'Prefer not to say',
+                phone: '',
+                bloodGroup: '',
+                allergies: 'No known allergies',
+                medications: 'None'
+            };
+        }
+
+        // Toggle chatbot visibility
+        function toggleChatbot() {
+            if (chatbotWindow.style.display === 'flex') {
+                chatbotWindow.style.display = 'none';
+            } else {
+                chatbotWindow.style.display = 'flex';
+            }
+        }
+
+        // Send chat message
+        function sendChatMessage() {
+            const message = chatbotInput.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = message;
+            chatbotMessages.appendChild(userMessage);
+            
+            // Clear input
+            chatbotInput.value = '';
+            
+            // Scroll to bottom
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            // Simulate bot response
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot-message';
+                botMessage.textContent = botResponse;
+                chatbotMessages.appendChild(botMessage);
+                
+                // Scroll to bottom
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }, 1000);
+        }
+
+        // Get bot response based on user message
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('appointment') || lowerMessage.includes('book')) {
+                return "To book an appointment, please go to the Doctors section, select a specialist, and click the 'Book Now' button. You'll need to be logged in to book an appointment.";
+            } else if (lowerMessage.includes('medicine') || lowerMessage.includes('pharmacy')) {
+                return "You can browse and purchase medicines in our Pharmacy section. We offer both prescription and over-the-counter medications with guaranteed authenticity.";
+            } else if (lowerMessage.includes('login') || lowerMessage.includes('sign up')) {
+                return "You can create an account by clicking the 'Sign Up' button in the top right corner. If you already have an account, click 'Login'.";
+            } else if (lowerMessage.includes('emergency') || lowerMessage.includes('urgent')) {
+                return "If this is a medical emergency, please call your local emergency services immediately. For non-emergency medical questions, you can book an appointment with one of our doctors.";
+            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                return "Hello! How can I assist you with your healthcare needs today?";
+            } else if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                return "Our medicine prices are competitive and transparent. You can view prices for each medicine in the Pharmacy section. Doctor consultation fees vary by specialist.";
+            } else if (lowerMessage.includes('delivery') || lowerMessage.includes('shipping')) {
+                return "We offer fast and reliable medicine delivery across India. Standard delivery is 2-3 business days. Express delivery options are also available.";
+            } else {
+                return "I'm here to help with your healthcare needs. You can ask me about booking appointments, our pharmacy services, or creating an account. How can I assist you?";
+            }
+        }
+
+        // Show alert message
+        function showAlert(message, type) {
+            // Create alert element
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type === 'error' ? 'danger' : 'success'} alert-dismissible fade show`;
+            alert.style.position = 'fixed';
+            alert.style.top = '20px';
+            alert.style.right = '20px';
+            alert.style.zIndex = '9999';
+            alert.style.minWidth = '300px';
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alert);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.parentNode.removeChild(alert);
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
