@@ -1,0 +1,609 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Appointments - Medicare Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .badge {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .badge.info {
+            background: #3498db;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: background 0.3s;
+        }
+
+        .nav-link:hover {
+            background: #764ba2;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .filter-section input,
+        .filter-section select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .filter-section button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .filter-section button:hover {
+            background: #764ba2;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #34495e;
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+            transition: background 0.3s;
+        }
+
+        .info {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .sub-info {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-confirm {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-confirm:hover {
+            background: #229954;
+        }
+
+        .btn-cancel {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background: #c0392b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7f8c8d;
+        }
+
+        .empty-state-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #2c3e50;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-body p {
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .modal-footer button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .filter-section {
+                flex-direction: column;
+            }
+
+            .filter-section input,
+            .filter-section select,
+            .filter-section button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 All Appointments Management</h1>
+            <p>View and manage all appointments across the system</p>
+            
+            <div class="badges">
+                <span class="badge">Total: {{ total_appointments }}</span>
+                <span class="badge info">Pending: {{ pending_count }}</span>
+            </div>
+
+            <a href="/" class="nav-link">← Back to Home</a>
+            <a href="/admin/" class="nav-link">Admin Panel</a>
+        </div>
+
+        <div class="alert" id="alert"></div>
+
+        <div class="filter-section">
+            <input type="text" id="searchInput" placeholder="Search by doctor or patient name...">
+            <select id="filterStatus">
+                <option value="">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+            <button onclick="applyFilters()">Filter</button>
+            <button onclick="loadAppointments()" style="background: #95a5a6;">Refresh</button>
+        </div>
+
+        <div class="table-container" id="tableContainer">
+            <div class="empty-state">
+                <div class="empty-state-icon">⏳</div>
+                <p>Loading appointments...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Update Appointment Status</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Appointment ID:</strong> <span id="modalAppointmentId"></span></p>
+                <p><strong>Doctor:</strong> <span id="modalDoctorName"></span></p>
+                <p><strong>Patient:</strong> <span id="modalPatientName"></span></p>
+                <p><strong>Current Status:</strong> <span id="modalCurrentStatus"></span></p>
+                <p style="margin-top: 20px;">
+                    <label for="newStatus"><strong>New Status:</strong></label><br>
+                    <select id="newStatus" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn-primary" onclick="updateStatus()">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allAppointments = [];
+        let selectedAppointmentId = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAppointments();
+            setInterval(loadAppointments, 30000);
+        });
+
+        function loadAppointments() {
+            fetch('/api/admin-appointments/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    allAppointments = data.appointments;
+                    renderTable(allAppointments);
+                    showAlert('Appointments loaded', 'success');
+                } else {
+                    showAlert(data.error || 'Error loading appointments', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAlert('Failed to load appointments', 'error');
+            });
+        }
+
+        function renderTable(appointments) {
+            const container = document.getElementById('tableContainer');
+
+            if (appointments.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">✅</div>
+                        <p>No appointments found</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Patient Name</th>
+                                <th>Date & Time</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            appointments.forEach(appt => {
+                const date = new Date(appt.date + 'T' + appt.time);
+                const dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                const timeStr = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+                html += `
+                    <tr>
+                        <td>
+                            <div class="info">${appt.doctor.name}</div>
+                            <div class="sub-info">${appt.doctor.specialty}</div>
+                        </td>
+                        <td>
+                            <div class="info">${appt.patient.name}</div>
+                            <div class="sub-info">${appt.patient.email}</div>
+                        </td>
+                        <td>
+                            <div class="info">${dateStr}</div>
+                            <div class="sub-info">${timeStr}</div>
+                        </td>
+                        <td>${appt.reason || '-'}</td>
+                        <td>
+                            <span class="status-badge status-${appt.status.toLowerCase()}">${appt.status}</span>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn btn-confirm" onclick="openUpdateModal(${appt.id}, '${appt.doctor.name}', '${appt.patient.name}', '${appt.status}')">
+                                    Update
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function openUpdateModal(appointmentId, doctorName, patientName, currentStatus) {
+            selectedAppointmentId = appointmentId;
+            document.getElementById('modalAppointmentId').textContent = appointmentId;
+            document.getElementById('modalDoctorName').textContent = doctorName;
+            document.getElementById('modalPatientName').textContent = patientName;
+            document.getElementById('modalCurrentStatus').textContent = currentStatus;
+            document.getElementById('newStatus').value = currentStatus;
+            document.getElementById('confirmModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('confirmModal').style.display = 'none';
+        }
+
+        function updateStatus() {
+            const newStatus = document.getElementById('newStatus').value;
+            fetch('/api/admin-appointments/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    appointment_id: selectedAppointmentId,
+                    status: newStatus
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    showAlert(`Appointment updated to ${newStatus}`, 'success');
+                    loadAppointments();
+                    closeModal();
+                } else {
+                    showAlert(data.error || 'Error updating appointment', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAlert('Failed to update appointment', 'error');
+            });
+        }
+
+        function applyFilters() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const statusFilter = document.getElementById('filterStatus').value;
+
+            const filtered = allAppointments.filter(appt => {
+                const matchesSearch = 
+                    appt.doctor.name.toLowerCase().includes(searchText) ||
+                    appt.patient.name.toLowerCase().includes(searchText);
+                
+                const matchesStatus = statusFilter === '' || appt.status === statusFilter;
+
+                return matchesSearch && matchesStatus;
+            });
+
+            renderTable(filtered);
+        }
+
+        function showAlert(message, type) {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.className = `alert ${type}`;
+            alert.style.display = 'block';
+
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('confirmModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

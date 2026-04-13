@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Add New Doctor</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label">Name</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_specialty" class="form-label">Specialty</label>
+                            {{ form.specialty }}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="id_experience_years" class="form-label">Experience (Years)</label>
+                                    {{ form.experience_years }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="id_rating" class="form-label">Rating</label>
+                                    {{ form.rating }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_availability" class="form-label">Availability</label>
+                            {{ form.availability }}
+                            <div class="form-text">Example: Mon-Fri 9am-5pm</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_hospital" class="form-label">Hospital/Clinic</label>
+                            {{ form.hospital }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_image_url" class="form-label">Image URL</label>
+                            {{ form.image_url }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Doctor</button>
+                        <a href="{% url 'doctor_list' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
